@@ -1,0 +1,5 @@
+.wc-env
+momentum
+.env
+*.csv
+notes.md
