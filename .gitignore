@@ -3,3 +3,4 @@ momentum
 .env
 *.csv
 notes.md
+*.html
