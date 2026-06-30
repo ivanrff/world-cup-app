@@ -1,0 +1,6142 @@
+{
+    "matchInfo": {
+        "id": "3hsg9oklerq6uua8pos3dmdck",
+        "coverageLevel": "13",
+        "date": "2026-06-29Z",
+        "time": "17:00:00Z",
+        "localDate": "2026-06-29",
+        "localTime": "12:00:00",
+        "numberOfPeriods": 2,
+        "periodLength": 45,
+        "overtimeLength": 15,
+        "var": "1",
+        "lastUpdated": "2026-06-29T22:08:17Z",
+        "nextMatchWinnerId": "9fqb3vpytcmgk9pozahr7iz9w",
+        "description": "Brazil vs Japan",
+        "sport": {
+            "id": "289u5typ3vp4ifwh5thalohmq",
+            "name": "Soccer"
+        },
+        "ruleset": {
+            "id": "79plas4983031idr6vw83nuel",
+            "name": "Men"
+        },
+        "competition": {
+            "id": "70excpe1synn9kadnbppahdn7",
+            "name": "FIFA World Cup",
+            "knownName": "FIFA World Cup",
+            "competitionCode": "WOC",
+            "competitionFormat": "International cup",
+            "country": {
+                "id": "7yasa43laq1nb2e6f8bfuvxed",
+                "name": "World"
+            }
+        },
+        "tournamentCalendar": {
+            "id": "873cbl9cd9butm4air0mugxzo",
+            "startDate": "2026-06-11Z",
+            "endDate": "2026-07-19Z",
+            "name": "2026 Canada/Mexico/USA"
+        },
+        "stage": {
+            "id": "brq0tx2gzolma2dl5evds8zkk",
+            "formatId": "cg4bpdesyc3y0f9fnkhqd5m8l",
+            "startDate": "2026-06-28Z",
+            "endDate": "2026-07-04Z",
+            "name": "16th Finals"
+        },
+        "contestant": [
+            {
+                "id": "ajab3nmpoltsoeqcuoyi4pwzx",
+                "name": "Brazil",
+                "shortName": "Brazil",
+                "officialName": "Brazil",
+                "code": "BRA",
+                "position": "home",
+                "country": {
+                    "id": "2vufyvpoxd9lfl9f6vpp7tz6y",
+                    "name": "Brazil"
+                }
+            },
+            {
+                "id": "6duaxcbrofil112qfq4v895go",
+                "name": "Japan",
+                "shortName": "Japan",
+                "officialName": "Japan",
+                "code": "JPN",
+                "position": "away",
+                "country": {
+                    "id": "lxyibh89lpdc0bfian1nx0xq",
+                    "name": "Japan"
+                }
+            }
+        ],
+        "venue": {
+            "id": "ei31pavx1fm4r0lcwczdnttfy",
+            "neutral": "yes",
+            "longName": "Houston Stadium",
+            "shortName": "Houston Stadium",
+            "latitude": "29.684827801",
+            "longitude": "-95.410938263"
+        }
+    },
+    "liveData": {
+        "matchDetails": {
+            "periodId": 14,
+            "matchStatus": "Played",
+            "winner": "home",
+            "matchLengthMin": 104,
+            "matchLengthSec": 44,
+            "period": [
+                {
+                    "id": 1,
+                    "start": "2026-06-29T17:00:15Z",
+                    "end": "2026-06-29T17:49:15Z",
+                    "lengthMin": 49,
+                    "lengthSec": 0,
+                    "announcedInjuryTime": 240
+                },
+                {
+                    "id": 2,
+                    "start": "2026-06-29T18:06:51Z",
+                    "end": "2026-06-29T19:02:35Z",
+                    "lengthMin": 55,
+                    "lengthSec": 44,
+                    "announcedInjuryTime": 360
+                }
+            ],
+            "scores": {
+                "ht": {
+                    "home": 0,
+                    "away": 1
+                },
+                "ft": {
+                    "home": 2,
+                    "away": 1
+                },
+                "total": {
+                    "home": 2,
+                    "away": 1
+                }
+            }
+        },
+        "preMatchPredictions": [
+            {
+                "type": "Win",
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "56.216"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "19.502"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "24.282"
+                    }
+                ]
+            }
+        ],
+        "overallLivePredictions": [
+            {
+                "type": "Win",
+                "timeMin": 0,
+                "timeSec": 0,
+                "periodId": 14,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "100.000"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.000"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.000"
+                    }
+                ]
+            }
+        ],
+        "livePredictions": [
+            {
+                "type": "Win",
+                "timeMin": 0,
+                "timeSec": 0,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.474"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.421"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.105"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 0,
+                "timeSec": 2,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.470"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.420"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.110"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 0,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.413"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.412"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.175"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 0,
+                "timeSec": 56,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.388"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.408"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.204"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 0,
+                "timeSec": 56,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.388"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.408"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.204"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 0,
+                "timeSec": 57,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.387"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.407"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.206"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 0,
+                "timeSec": 57,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.387"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.407"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.206"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 0,
+                "timeSec": 58,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.387"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.407"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.206"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 0,
+                "timeSec": 58,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.387"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.407"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.206"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 0,
+                "timeSec": 59,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.384"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.407"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.209"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 1,
+                "timeSec": 24,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.346"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.401"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.253"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 1,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.323"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.397"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.280"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 2,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.230"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.382"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.388"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 3,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.137"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.366"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.497"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 4,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "54.042"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.349"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.609"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 5,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.946"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.331"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.723"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 6,
+                "timeSec": 5,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.905"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.324"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.771"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 6,
+                "timeSec": 6,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.905"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.324"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.771"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 6,
+                "timeSec": 6,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.905"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.324"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.771"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 6,
+                "timeSec": 7,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.902"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.323"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.775"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 6,
+                "timeSec": 7,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.902"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.323"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.775"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 6,
+                "timeSec": 8,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.900"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.323"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.777"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 6,
+                "timeSec": 8,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.900"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.323"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.777"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 6,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.852"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.313"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.835"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 7,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.753"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.294"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "25.953"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 8,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.654"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.273"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.073"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 9,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.549"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.258"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.193"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 10,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.435"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.246"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.319"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 11,
+                "timeSec": 20,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.356"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.238"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.406"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 11,
+                "timeSec": 20,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.356"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.238"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.406"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 11,
+                "timeSec": 21,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.356"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.238"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.406"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 11,
+                "timeSec": 21,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.356"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.238"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.406"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 11,
+                "timeSec": 22,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.354"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.237"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.409"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 11,
+                "timeSec": 22,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.354"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.237"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.409"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 11,
+                "timeSec": 23,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.351"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.237"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.412"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 11,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.322"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.234"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.444"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 11,
+                "timeSec": 43,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.314"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.233"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.453"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 11,
+                "timeSec": 43,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.314"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.233"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.453"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 12,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.205"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.222"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.573"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 13,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.087"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.208"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.705"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 13,
+                "timeSec": 59,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.047"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.204"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.749"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 13,
+                "timeSec": 59,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.047"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.204"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.749"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 14,
+                "timeSec": 0,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.044"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.204"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.752"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 14,
+                "timeSec": 0,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.049"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.204"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.747"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 14,
+                "timeSec": 1,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.047"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.204"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.749"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 14,
+                "timeSec": 1,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.047"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.204"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.749"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 14,
+                "timeSec": 3,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.041"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.203"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.756"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 14,
+                "timeSec": 3,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "53.041"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.203"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.756"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 14,
+                "timeSec": 38,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.970"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.195"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.835"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 14,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.968"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.195"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.837"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 14,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.968"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.195"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.837"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 15,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.865"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.163"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "26.972"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 16,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.751"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.117"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "27.132"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 17,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.634"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.072"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "27.294"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 17,
+                "timeSec": 40,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.631"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.071"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "27.298"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 17,
+                "timeSec": 41,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.629"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.070"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "27.301"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 17,
+                "timeSec": 41,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.629"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.070"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "27.301"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 17,
+                "timeSec": 42,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.629"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.070"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "27.301"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 17,
+                "timeSec": 42,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.629"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.070"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "27.301"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 17,
+                "timeSec": 43,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.626"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.069"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "27.305"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 17,
+                "timeSec": 43,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.626"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.069"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "27.305"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 18,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.512"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "20.025"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "27.463"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 19,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.386"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "19.977"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "27.637"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 20,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.256"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "19.928"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "27.816"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 21,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "52.122"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "19.878"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.000"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 22,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "51.981"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "19.827"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.192"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 23,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "51.881"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "19.790"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.329"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 24,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "51.756"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "19.746"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.498"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 25,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "51.635"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "19.702"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.663"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 26,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "51.504"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "19.657"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.839"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 27,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "51.352"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "19.604"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.044"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 28,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "51.194"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "19.549"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.257"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 29,
+                "timeSec": 18,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.990"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.087"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.923"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 29,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.912"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.139"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.949"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 29,
+                "timeSec": 44,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.897"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.149"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.954"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 29,
+                "timeSec": 45,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.897"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.149"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.954"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 29,
+                "timeSec": 56,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.863"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.171"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.966"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 30,
+                "timeSec": 7,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.838"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.188"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.974"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 30,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.701"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.279"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.020"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 31,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.456"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.447"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.097"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 31,
+                "timeSec": 48,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.417"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.474"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.109"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 31,
+                "timeSec": 48,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.417"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.474"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.109"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 31,
+                "timeSec": 49,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.412"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.477"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.111"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 31,
+                "timeSec": 49,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.412"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.477"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.111"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 31,
+                "timeSec": 50,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.407"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.481"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.112"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 32,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.215"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.615"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.170"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 33,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "22.963"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.796"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.241"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 34,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "22.725"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "47.970"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.305"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 35,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "22.466"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "48.164"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.370"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 36,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "22.206"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "48.364"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.430"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 37,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "21.940"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "48.574"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.486"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 38,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "21.678"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "48.785"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.537"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 39,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "21.411"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "49.007"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.582"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 40,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "21.139"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "49.269"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.592"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 41,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.868"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "49.568"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.564"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 42,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.600"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "49.870"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.530"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 43,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.323"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.188"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.489"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 44,
+                "timeSec": 31,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.090"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.457"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.453"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 44,
+                "timeSec": 32,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.085"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.463"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.452"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 44,
+                "timeSec": 33,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.090"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.457"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.453"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 44,
+                "timeSec": 33,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.090"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.457"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.453"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 44,
+                "timeSec": 34,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.090"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.457"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.453"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 44,
+                "timeSec": 34,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.090"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.457"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.453"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 44,
+                "timeSec": 35,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.085"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.463"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.452"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 44,
+                "timeSec": 35,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.085"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.463"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.452"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 44,
+                "timeSec": 36,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.080"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.469"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.451"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 44,
+                "timeSec": 38,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.080"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.469"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.451"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 44,
+                "timeSec": 38,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.080"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.469"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.451"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 44,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.075"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.474"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.451"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 45,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "19.811"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.786"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.403"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 45,
+                "timeSec": 51,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "19.751"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "50.859"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.390"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 46,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "19.507"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "51.155"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.338"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 47,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "19.212"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "51.523"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.265"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 48,
+                "timeSec": 39,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "18.917"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "51.900"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.183"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 49,
+                "timeSec": 3,
+                "periodId": 1,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "18.804"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "52.046"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.150"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 45,
+                "timeSec": 0,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "18.748"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "52.119"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.133"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 45,
+                "timeSec": 1,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "18.743"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "52.126"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.131"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 45,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "18.733"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "52.139"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.128"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 46,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "18.417"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "52.560"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "29.023"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 46,
+                "timeSec": 52,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "18.166"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "52.901"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.933"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 46,
+                "timeSec": 58,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "18.136"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "52.943"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.921"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 46,
+                "timeSec": 58,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "18.136"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "52.943"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.921"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 47,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "18.110"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "52.979"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.911"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 47,
+                "timeSec": 35,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.894"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.222"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.884"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 47,
+                "timeSec": 38,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.873"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.245"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.882"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 47,
+                "timeSec": 38,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.873"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.245"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.882"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 47,
+                "timeSec": 39,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.867"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.252"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.881"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 47,
+                "timeSec": 39,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.867"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.252"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.881"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 47,
+                "timeSec": 40,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.860"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.259"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.881"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 47,
+                "timeSec": 40,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.860"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.259"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.881"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 47,
+                "timeSec": 41,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.853"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.267"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.880"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 47,
+                "timeSec": 41,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.853"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.267"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.880"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 47,
+                "timeSec": 45,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.860"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.259"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.881"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 47,
+                "timeSec": 46,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.860"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.259"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.881"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 47,
+                "timeSec": 46,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.860"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.259"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.881"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 48,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.739"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.394"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.867"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 48,
+                "timeSec": 37,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.505"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.659"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.836"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 48,
+                "timeSec": 37,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.505"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.659"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.836"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 48,
+                "timeSec": 38,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.498"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.666"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.836"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 48,
+                "timeSec": 38,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.498"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.666"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.836"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 48,
+                "timeSec": 39,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.492"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.674"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.834"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 48,
+                "timeSec": 39,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.492"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.674"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.834"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 48,
+                "timeSec": 40,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.485"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.681"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.834"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 48,
+                "timeSec": 40,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.485"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.681"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.834"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 49,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.324"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "53.865"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.811"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 50,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "16.916"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "54.338"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.746"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 51,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "16.502"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "54.829"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.669"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 52,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "16.096"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "55.321"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.583"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 53,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "15.684"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "55.831"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.485"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 54,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "15.321"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "56.291"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.388"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 54,
+                "timeSec": 36,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "15.097"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "56.579"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.324"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 55,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "14.913"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "56.817"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "28.270"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 55,
+                "timeSec": 33,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "42.627"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "16.196"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "41.177"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 56,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "42.399"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "16.090"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "41.511"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 56,
+                "timeSec": 12,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "42.342"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "16.063"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "41.595"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 56,
+                "timeSec": 13,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "42.335"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "16.060"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "41.605"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 56,
+                "timeSec": 18,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "42.310"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "16.049"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "41.641"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 56,
+                "timeSec": 19,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "42.297"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "16.043"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "41.660"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 56,
+                "timeSec": 39,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "42.201"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "15.998"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "41.801"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 57,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "42.060"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "15.932"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "42.008"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 58,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "41.624"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "15.729"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "42.647"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 59,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "41.214"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "15.539"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "43.247"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 59,
+                "timeSec": 50,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "40.894"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "15.389"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "43.717"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 59,
+                "timeSec": 53,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "40.874"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "15.380"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "43.746"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 59,
+                "timeSec": 53,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "40.874"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "15.380"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "43.746"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 59,
+                "timeSec": 54,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "40.867"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "15.377"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "43.756"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 59,
+                "timeSec": 54,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "40.867"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "15.377"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "43.756"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 59,
+                "timeSec": 55,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "40.853"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "15.371"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "43.776"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 59,
+                "timeSec": 55,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "40.853"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "15.371"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "43.776"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 60,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "40.799"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "15.346"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "43.855"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 61,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "40.380"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "15.150"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "44.470"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 62,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "39.976"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "14.977"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "45.047"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 63,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "39.185"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "14.702"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "46.113"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 64,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "38.301"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "14.397"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "47.302"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 65,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "37.384"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "14.076"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "48.540"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 66,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "36.361"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "13.712"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "49.927"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 67,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "35.426"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "13.375"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "51.199"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 68,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "34.485"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "13.110"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "52.405"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 69,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "33.576"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "12.876"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "53.548"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 70,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "32.833"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "12.681"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "54.486"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 71,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "32.100"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "12.474"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "55.426"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 71,
+                "timeSec": 35,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "31.574"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "12.305"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "56.121"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 71,
+                "timeSec": 36,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "31.559"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "12.300"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "56.141"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 71,
+                "timeSec": 40,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "31.497"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "12.280"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "56.223"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 71,
+                "timeSec": 40,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "31.497"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "12.280"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "56.223"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 71,
+                "timeSec": 41,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "31.481"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "12.275"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "56.244"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 72,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "31.124"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "12.160"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "56.716"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 73,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "30.128"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "11.835"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "58.037"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 74,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "29.160"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "11.515"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "59.325"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 75,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "28.156"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "11.181"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "60.663"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 76,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "27.181"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "10.852"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "61.967"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 77,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "26.188"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "10.515"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "63.297"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 78,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "25.226"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "10.184"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "64.590"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 79,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "24.214"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "9.834"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "65.952"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 80,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "23.183"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "9.475"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "67.342"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 81,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "22.181"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "9.124"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "68.695"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 82,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "21.159"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "8.763"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "70.078"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 83,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.115"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "8.392"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "71.493"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 83,
+                "timeSec": 9,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.003"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "8.351"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "71.646"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 83,
+                "timeSec": 9,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "20.003"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "8.351"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "71.646"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 83,
+                "timeSec": 10,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "19.986"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "8.346"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "71.668"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 83,
+                "timeSec": 10,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "19.986"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "8.346"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "71.668"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 83,
+                "timeSec": 11,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "19.970"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "8.340"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "71.690"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 83,
+                "timeSec": 11,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "19.970"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "8.340"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "71.690"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 83,
+                "timeSec": 28,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "19.857"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "8.300"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "71.843"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 83,
+                "timeSec": 28,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "19.857"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "8.300"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "71.843"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 84,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "19.206"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "8.068"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "72.726"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 85,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "18.189"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "7.702"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "74.109"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 86,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.149"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "7.329"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "75.522"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 86,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.149"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "7.329"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "75.522"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 86,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "17.149"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "7.329"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "75.522"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 87,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "16.080"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "6.942"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "76.978"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 87,
+                "timeSec": 45,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "15.295"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "6.658"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "78.047"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 87,
+                "timeSec": 46,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "15.258"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "6.645"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "78.097"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 87,
+                "timeSec": 46,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "15.258"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "6.645"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "78.097"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 87,
+                "timeSec": 47,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "15.240"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "6.639"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "78.121"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 87,
+                "timeSec": 47,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "15.240"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "6.639"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "78.121"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 88,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "14.928"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "6.526"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "78.546"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 89,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "13.724"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "6.088"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "80.188"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 89,
+                "timeSec": 9,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "13.605"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "6.044"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "80.351"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 89,
+                "timeSec": 11,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "13.565"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "6.029"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "80.406"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 89,
+                "timeSec": 11,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "13.565"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "6.029"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "80.406"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 89,
+                "timeSec": 12,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "13.545"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "6.022"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "80.433"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 89,
+                "timeSec": 12,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "13.545"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "6.022"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "80.433"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 90,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "12.411"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "5.607"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "81.982"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 91,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "13.403"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "5.970"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "80.627"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 92,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "13.240"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "5.911"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "80.849"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 93,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "11.847"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "5.399"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "82.754"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 94,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "10.070"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "4.735"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "85.195"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 95,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "7.746"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "3.829"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "88.425"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 95,
+                "timeSec": 38,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "95.420"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.091"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "4.489"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 96,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "95.902"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.070"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "4.028"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 96,
+                "timeSec": 16,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "96.187"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.059"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "3.754"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 96,
+                "timeSec": 17,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "96.253"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.057"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "3.690"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 96,
+                "timeSec": 27,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "96.390"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.052"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "3.558"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 97,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "97.006"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.033"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "2.961"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 97,
+                "timeSec": 15,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "97.087"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.031"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "2.882"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 98,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "98.692"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.005"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "1.303"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 98,
+                "timeSec": 21,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.378"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.001"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.621"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 98,
+                "timeSec": 22,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.422"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.001"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.577"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 98,
+                "timeSec": 23,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.422"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.001"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.577"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 98,
+                "timeSec": 23,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.422"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.001"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.577"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 98,
+                "timeSec": 24,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.465"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.001"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.534"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 98,
+                "timeSec": 24,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.465"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.001"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.534"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 99,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.875"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.000"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.125"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 99,
+                "timeSec": 7,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.875"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.000"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.125"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 99,
+                "timeSec": 8,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.875"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.000"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.125"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 99,
+                "timeSec": 8,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.875"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.000"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.125"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 99,
+                "timeSec": 9,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.875"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.000"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.125"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 99,
+                "timeSec": 9,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.875"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.000"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.125"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 99,
+                "timeSec": 10,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.875"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.000"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.125"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 99,
+                "timeSec": 10,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.875"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.000"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.125"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 100,
+                "timeSec": 3,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "99.875"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.000"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.125"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 100,
+                "timeSec": 46,
+                "periodId": 2,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "100.000"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.000"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.000"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 0,
+                "timeSec": 0,
+                "periodId": 14,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "100.000"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.000"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.000"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 0,
+                "timeSec": 0,
+                "periodId": 14,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "100.000"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.000"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.000"
+                    }
+                ]
+            },
+            {
+                "type": "Win",
+                "timeMin": 0,
+                "timeSec": 0,
+                "periodId": 14,
+                "prediction": [
+                    {
+                        "type": "Home",
+                        "probability": "100.000"
+                    },
+                    {
+                        "type": "Away",
+                        "probability": "0.000"
+                    },
+                    {
+                        "type": "Draw",
+                        "probability": "0.000"
+                    }
+                ]
+            }
+        ],
+        "event": [
+            {
+                "id": 2945806937,
+                "eventId": 2,
+                "typeId": 32,
+                "periodId": 1,
+                "timeMin": 0,
+                "timeSec": 0,
+                "contestantId": "ajab3nmpoltsoeqcuoyi4pwzx",
+                "outcome": 1,
+                "x": 0.0,
+                "y": 0.0,
+                "timeStamp": "2026-06-29T17:00:15Z",
+                "lastModified": "2026-06-29T19:21:53Z",
+                "predictions": {
+                    "type": "Win",
+                    "timeMin": 0,
+                    "timeSec": 0,
+                    "prediction": [
+                        {
+                            "type": "Home",
+                            "probability": "54.474"
+                        },
+                        {
+                            "type": "Away",
+                            "probability": "20.421"
+                        },
+                        {
+                            "type": "Draw",
+                            "probability": "25.105"
+                        }
+                    ]
+                },
+                "qualifier": [
+                    {
+                        "id": 6462444725,
+                        "qualifierId": 127,
+                        "value": "Left to Right"
+                    }
+                ]
+            },
+            {
+                "id": 2945806939,
+                "eventId": 2,
+                "typeId": 32,
+                "periodId": 1,
+                "timeMin": 0,
+                "timeSec": 0,
+                "contestantId": "6duaxcbrofil112qfq4v895go",
+                "outcome": 1,
+                "x": 0.0,
+                "y": 0.0,
+                "timeStamp": "2026-06-29T17:00:15Z",
+                "lastModified": "2026-06-29T17:00:16Z",
+                "predictions": {
+                    "type": "Win",
+                    "timeMin": 0,
+                    "timeSec": 2,
+                    "prediction": [
+                        {
+                            "type": "Home",
+                            "probability": "54.470"
+                        },
+                        {
+                            "type": "Away",
+                            "probability": "20.420"
+                        },
+                        {
+                            "type": "Draw",
+                            "probability": "25.110"
+                        }
+                    ]
+                },
+                "qualifier": [
+                    {
+                        "id": 6462444727,
+                        "qualifierId": 127,
+                        "value": "Right to Left"
+                    }
+                ]
+            },
+            {
+                "id": 2945807407,
+                "eventId": 83,
+                "typeId": 17,
+                "periodId": 1,
+                "timeMin": 11,
+                "timeSec": 29,
+                "playerId": "6dtp194pewnyuhwkxcn2xpf8q",
+                "playerName": "K. Sano",
+                "contestantId": "6duaxcbrofil112qfq4v895go",
+                "outcome": 1,
+                "x": 62.3,
+                "y": 7.1,
+                "timeStamp": "2026-06-29T17:11:45Z",
+                "lastModified": "2026-06-29T17:11:57Z",
+                "predictions": {
+                    "type": "Win",
+                    "timeMin": 11,
+                    "timeSec": 43,
+                    "prediction": [
+                        {
+                            "type": "Home",
+                            "probability": "53.314"
+                        },
+                        {
+                            "type": "Away",
+                            "probability": "20.233"
+                        },
+                        {
+                            "type": "Draw",
+                            "probability": "26.453"
+                        }
+                    ]
+                },
+                "qualifier": [
+                    {
+                        "id": 6462447553,
+                        "qualifierId": 31
+                    },
+                    {
+                        "id": 6462447555,
+                        "qualifierId": 392
+                    },
+                    {
+                        "id": 6462447557,
+                        "qualifierId": 13,
+                        "value": "243"
+                    },
+                    {
+                        "id": 6462447559,
+                        "qualifierId": 55,
+                        "value": "82"
+                    }
+                ]
+            },
+            {
+                "id": 2945807495,
+                "eventId": 171,
+                "typeId": 17,
+                "periodId": 1,
+                "timeMin": 13,
+                "timeSec": 58,
+                "playerId": "6nb8hub5usi3iasywa2fjf1lh",
+                "playerName": "Casemiro",
+                "contestantId": "ajab3nmpoltsoeqcuoyi4pwzx",
+                "outcome": 1,
+                "x": 23.6,
+                "y": 36.6,
+                "timeStamp": "2026-06-29T17:14:14Z",
+                "lastModified": "2026-06-29T17:14:17Z",
+                "predictions": {
+                    "type": "Win",
+                    "timeMin": 14,
+                    "timeSec": 3,
+                    "prediction": [
+                        {
+                            "type": "Home",
+                            "probability": "53.041"
+                        },
+                        {
+                            "type": "Away",
+                            "probability": "20.203"
+                        },
+                        {
+                            "type": "Draw",
+                            "probability": "26.756"
+                        }
+                    ]
+                },
+                "qualifier": [
+                    {
+                        "id": 6462448127,
+                        "qualifierId": 31
+                    },
+                    {
+                        "id": 6462448129,
+                        "qualifierId": 393
+                    },
+                    {
+                        "id": 6462448131,
+                        "qualifierId": 13,
+                        "value": "243"
+                    },
+                    {
+                        "id": 6462448133,
+                        "qualifierId": 55,
+                        "value": "170"
+                    }
+                ]
+            },
+            {
+                "id": 2945807933,
+                "eventId": 168,
+                "typeId": 16,
+                "periodId": 1,
+                "timeMin": 28,
+                "timeSec": 47,
+                "playerId": "6dtp194pewnyuhwkxcn2xpf8q",
+                "playerName": "K. Sano",
+                "contestantId": "6duaxcbrofil112qfq4v895go",
+                "outcome": 1,
+                "x": 75.1,
+                "y": 42.9,
+                "timeStamp": "2026-06-29T17:29:03Z",
+                "lastModified": "2026-06-29T17:30:36Z",
+                "predictions": {
+                    "type": "Win",
+                    "timeMin": 29,
+                    "timeSec": 18,
+                    "prediction": [
+                        {
+                            "type": "Home",
+                            "probability": "23.990"
+                        },
+                        {
+                            "type": "Away",
+                            "probability": "47.087"
+                        },
+                        {
+                            "type": "Draw",
+                            "probability": "28.923"
+                        }
+                    ]
+                },
+                "qualifier": [
+                    {
+                        "id": 6462450733,
+                        "qualifierId": 18
+                    },
+                    {
+                        "id": 6462450735,
+                        "qualifierId": 56,
+                        "value": "Center"
+                    },
+                    {
+                        "id": 6462450737,
+                        "qualifierId": 327,
+                        "value": "2"
+                    },
+                    {
+                        "id": 6462450739,
+                        "qualifierId": 326,
+                        "value": "3"
+                    },
+                    {
+                        "id": 6462450753,
+                        "qualifierId": 23
+                    },
+                    {
+                        "id": 6462450755,
+                        "qualifierId": 20
+                    },
+                    {
+                        "id": 6462450757,
+                        "qualifierId": 321,
+                        "value": "0.03550326079130173"
+                    },
+                    {
+                        "id": 6462450759,
+                        "qualifierId": 374,
+                        "value": "2026-06-29 18:29:02.150"
+                    },
+                    {
+                        "id": 6462450763,
+                        "qualifierId": 375,
+                        "value": "28:46.398"
+                    },
+                    {
+                        "id": 6462450765,
+                        "qualifierId": 76
+                    },
+                    {
+                        "id": 6462450767,
+                        "qualifierId": 102,
+                        "value": "54.2"
+                    },
+                    {
+                        "id": 6462450769,
+                        "qualifierId": 103,
+                        "value": "1.9"
+                    },
+                    {
+                        "id": 6462450771,
+                        "qualifierId": 215
+                    },
+                    {
+                        "id": 6462450773,
+                        "qualifierId": 458
+                    },
+                    {
+                        "id": 6462450775,
+                        "qualifierId": 230,
+                        "value": "96.4"
+                    },
+                    {
+                        "id": 6462450777,
+                        "qualifierId": 231,
+                        "value": "47.7"
+                    },
+                    {
+                        "id": 6462450779,
+                        "qualifierId": 300
+                    },
+                    {
+                        "id": 6462450781,
+                        "qualifierId": 322,
+                        "value": "0.4937"
+                    },
+                    {
+                        "id": 6462450785,
+                        "qualifierId": 468,
+                        "value": "305"
+                    }
+                ]
+            },
+            {
+                "id": 2945808575,
+                "eventId": 296,
+                "typeId": 17,
+                "periodId": 1,
+                "timeMin": 44,
+                "timeSec": 31,
+                "playerId": "az15xx7m923srf9gdbwmiyga1",
+                "playerName": "D. Kamada",
+                "contestantId": "6duaxcbrofil112qfq4v895go",
+                "outcome": 1,
+                "x": 70.9,
+                "y": 56.0,
+                "timeStamp": "2026-06-29T17:44:46Z",
+                "lastModified": "2026-06-29T17:44:52Z",
+                "predictions": {
+                    "type": "Win",
+                    "timeMin": 44,
+                    "timeSec": 38,
+                    "prediction": [
+                        {
+                            "type": "Home",
+                            "probability": "20.080"
+                        },
+                        {
+                            "type": "Away",
+                            "probability": "50.469"
+                        },
+                        {
+                            "type": "Draw",
+                            "probability": "29.451"
+                        }
+                    ]
+                },
+                "qualifier": [
+                    {
+                        "id": 6462454457,
+                        "qualifierId": 31
+                    },
+                    {
+                        "id": 6462454459,
+                        "qualifierId": 393
+                    },
+                    {
+                        "id": 6462454461,
+                        "qualifierId": 13,
+                        "value": "243"
+                    },
+                    {
+                        "id": 6462454463,
+                        "qualifierId": 55,
+                        "value": "295"
+                    }
+                ]
+            },
+            {
+                "id": 2945808809,
+                "eventId": 333,
+                "typeId": 32,
+                "periodId": 2,
+                "timeMin": 45,
+                "timeSec": 0,
+                "contestantId": "6duaxcbrofil112qfq4v895go",
+                "outcome": 1,
+                "x": 0.0,
+                "y": 0.0,
+                "timeStamp": "2026-06-29T18:06:51Z",
+                "lastModified": "2026-06-29T18:06:51Z",
+                "predictions": {
+                    "type": "Win",
+                    "timeMin": 45,
+                    "timeSec": 0,
+                    "prediction": [
+                        {
+                            "type": "Home",
+                            "probability": "18.748"
+                        },
+                        {
+                            "type": "Away",
+                            "probability": "52.119"
+                        },
+                        {
+                            "type": "Draw",
+                            "probability": "29.133"
+                        }
+                    ]
+                },
+                "qualifier": [
+                    {
+                        "id": 6462455891,
+                        "qualifierId": 127,
+                        "value": "Left to Right"
+                    }
+                ]
+            },
+            {
+                "id": 2945808811,
+                "eventId": 525,
+                "typeId": 32,
+                "periodId": 2,
+                "timeMin": 45,
+                "timeSec": 0,
+                "contestantId": "ajab3nmpoltsoeqcuoyi4pwzx",
+                "outcome": 1,
+                "x": 0.0,
+                "y": 0.0,
+                "timeStamp": "2026-06-29T18:06:51Z",
+                "lastModified": "2026-06-29T18:06:51Z",
+                "predictions": {
+                    "type": "Win",
+                    "timeMin": 45,
+                    "timeSec": 1,
+                    "prediction": [
+                        {
+                            "type": "Home",
+                            "probability": "18.743"
+                        },
+                        {
+                            "type": "Away",
+                            "probability": "52.126"
+                        },
+                        {
+                            "type": "Draw",
+                            "probability": "29.131"
+                        }
+                    ]
+                },
+                "qualifier": [
+                    {
+                        "id": 6462455897,
+                        "qualifierId": 127,
+                        "value": "Right to Left"
+                    }
+                ]
+            },
+            {
+                "id": 2945808917,
+                "eventId": 553,
+                "typeId": 17,
+                "periodId": 2,
+                "timeMin": 47,
+                "timeSec": 34,
+                "playerId": "8yv9xuzriaecvvssfm8dlmz85",
+                "playerName": "Danilo",
+                "contestantId": "ajab3nmpoltsoeqcuoyi4pwzx",
+                "outcome": 1,
+                "x": 53.9,
+                "y": 43.9,
+                "timeStamp": "2026-06-29T18:09:25Z",
+                "lastModified": "2026-06-29T18:09:36Z",
+                "predictions": {
+                    "type": "Win",
+                    "timeMin": 47,
+                    "timeSec": 46,
+                    "prediction": [
+                        {
+                            "type": "Home",
+                            "probability": "17.860"
+                        },
+                        {
+                            "type": "Away",
+                            "probability": "53.259"
+                        },
+                        {
+                            "type": "Draw",
+                            "probability": "28.881"
+                        }
+                    ]
+                },
+                "qualifier": [
+                    {
+                        "id": 6462456495,
+                        "qualifierId": 31
+                    },
+                    {
+                        "id": 6462456497,
+                        "qualifierId": 393
+                    },
+                    {
+                        "id": 6462456499,
+                        "qualifierId": 13,
+                        "value": "243"
+                    },
+                    {
+                        "id": 6462456501,
+                        "qualifierId": 55,
+                        "value": "552"
+                    }
+                ]
+            },
+            {
+                "id": 2945809223,
+                "eventId": 633,
+                "typeId": 16,
+                "periodId": 2,
+                "timeMin": 55,
+                "timeSec": 6,
+                "playerId": "6nb8hub5usi3iasywa2fjf1lh",
+                "playerName": "Casemiro",
+                "contestantId": "ajab3nmpoltsoeqcuoyi4pwzx",
+                "outcome": 1,
+                "x": 96.7,
+                "y": 42.9,
+                "timeStamp": "2026-06-29T18:16:57Z",
+                "lastModified": "2026-06-29T18:18:26Z",
+                "assist": 1,
+                "predictions": {
+                    "type": "Win",
+                    "timeMin": 55,
+                    "timeSec": 33,
+                    "prediction": [
+                        {
+                            "type": "Home",
+                            "probability": "42.627"
+                        },
+                        {
+                            "type": "Away",
+                            "probability": "16.196"
+                        },
+                        {
+                            "type": "Draw",
+                            "probability": "41.177"
+                        }
+                    ]
+                },
+                "qualifier": [
+                    {
+                        "id": 6462458397,
+                        "qualifierId": 22
+                    },
+                    {
+                        "id": 6462458399,
+                        "qualifierId": 60
+                    },
+                    {
+                        "id": 6462458401,
+                        "qualifierId": 56,
+                        "value": "Center"
+                    },
+                    {
+                        "id": 6462458403,
+                        "qualifierId": 327,
+                        "value": "1"
+                    },
+                    {
+                        "id": 6462458405,
+                        "qualifierId": 326,
+                        "value": "2"
+                    },
+                    {
+                        "id": 6462458419,
+                        "qualifierId": 15
+                    },
+                    {
+                        "id": 6462458421,
+                        "qualifierId": 321,
+                        "value": "0.2821580767631531"
+                    },
+                    {
+                        "id": 6462458423,
+                        "qualifierId": 328
+                    },
+                    {
+                        "id": 6462458425,
+                        "qualifierId": 374,
+                        "value": "2026-06-29 19:16:57.305"
+                    },
+                    {
+                        "id": 6462458429,
+                        "qualifierId": 375,
+                        "value": "55:06.179"
+                    },
+                    {
+                        "id": 6462458447,
+                        "qualifierId": 79
+                    },
+                    {
+                        "id": 6462458449,
+                        "qualifierId": 29
+                    },
+                    {
+                        "id": 6462458451,
+                        "qualifierId": 154
+                    },
+                    {
+                        "id": 6462458453,
+                        "qualifierId": 55,
+                        "value": "632"
+                    },
+                    {
+                        "id": 6462458457,
+                        "qualifierId": 102,
+                        "value": "48.6"
+                    },
+                    {
+                        "id": 6462458459,
+                        "qualifierId": 103,
+                        "value": "31.0"
+                    },
+                    {
+                        "id": 6462458461,
+                        "qualifierId": 214
+                    },
+                    {
+                        "id": 6462458463,
+                        "qualifierId": 230,
+                        "value": "99.7"
+                    },
+                    {
+                        "id": 6462458465,
+                        "qualifierId": 231,
+                        "value": "46.8"
+                    },
+                    {
+                        "id": 6462458467,
+                        "qualifierId": 322,
+                        "value": "0.6037"
+                    }
+                ]
+            },
+            {
+                "id": 2945810133,
+                "eventId": 581,
+                "typeId": 17,
+                "periodId": 2,
+                "timeMin": 83,
+                "timeSec": 10,
+                "playerId": "bdcpptlf4dznvgwq5st8hxwyc",
+                "playerName": "J. Suzuki",
+                "contestantId": "6duaxcbrofil112qfq4v895go",
+                "outcome": 1,
+                "x": 14.0,
+                "y": 83.8,
+                "timeStamp": "2026-06-29T18:45:02Z",
+                "lastModified": "2026-06-29T18:45:18Z",
+                "predictions": {
+                    "type": "Win",
+                    "timeMin": 83,
+                    "timeSec": 28,
+                    "prediction": [
+                        {
+                            "type": "Home",
+                            "probability": "19.857"
+                        },
+                        {
+                            "type": "Away",
+                            "probability": "8.300"
+                        },
+                        {
+                            "type": "Draw",
+                            "probability": "71.843"
+                        }
+                    ]
+                },
+                "qualifier": [
+                    {
+                        "id": 6462463759,
+                        "qualifierId": 31
+                    },
+                    {
+                        "id": 6462463761,
+                        "qualifierId": 393
+                    },
+                    {
+                        "id": 6462463763,
+                        "qualifierId": 13,
+                        "value": "243"
+                    },
+                    {
+                        "id": 6462463765,
+                        "qualifierId": 55,
+                        "value": "580"
+                    }
+                ]
+            },
+            {
+                "id": 2945810465,
+                "eventId": 1024,
+                "typeId": 16,
+                "periodId": 2,
+                "timeMin": 95,
+                "timeSec": 0,
+                "playerId": "7ocm7nugzwos59il1pm4eub8q",
+                "playerName": "Gabriel Martinelli",
+                "contestantId": "ajab3nmpoltsoeqcuoyi4pwzx",
+                "outcome": 1,
+                "x": 89.8,
+                "y": 55.8,
+                "timeStamp": "2026-06-29T18:56:51Z",
+                "lastModified": "2026-06-29T19:00:32Z",
+                "assist": 1,
+                "predictions": {
+                    "type": "Win",
+                    "timeMin": 95,
+                    "timeSec": 38,
+                    "prediction": [
+                        {
+                            "type": "Home",
+                            "probability": "95.420"
+                        },
+                        {
+                            "type": "Away",
+                            "probability": "0.091"
+                        },
+                        {
+                            "type": "Draw",
+                            "probability": "4.489"
+                        }
+                    ]
+                },
+                "qualifier": [
+                    {
+                        "id": 6462465795,
+                        "qualifierId": 22
+                    },
+                    {
+                        "id": 6462465797,
+                        "qualifierId": 17
+                    },
+                    {
+                        "id": 6462465799,
+                        "qualifierId": 56,
+                        "value": "Center"
+                    },
+                    {
+                        "id": 6462465801,
+                        "qualifierId": 327,
+                        "value": "2"
+                    },
+                    {
+                        "id": 6462465803,
+                        "qualifierId": 326,
+                        "value": "2"
+                    },
+                    {
+                        "id": 6462465807,
+                        "qualifierId": 20
+                    },
+                    {
+                        "id": 6462465809,
+                        "qualifierId": 321,
+                        "value": "0.21182745695114136"
+                    },
+                    {
+                        "id": 6462465811,
+                        "qualifierId": 374,
+                        "value": "2026-06-29 19:56:51.013"
+                    },
+                    {
+                        "id": 6462465815,
+                        "qualifierId": 375,
+                        "value": "94:59.887"
+                    },
+                    {
+                        "id": 6462465827,
+                        "qualifierId": 80
+                    },
+                    {
+                        "id": 6462465829,
+                        "qualifierId": 29
+                    },
+                    {
+                        "id": 6462465831,
+                        "qualifierId": 154
+                    },
+                    {
+                        "id": 6462465833,
+                        "qualifierId": 55,
+                        "value": "1023"
+                    },
+                    {
+                        "id": 6462465837,
+                        "qualifierId": 102,
+                        "value": "46.3"
+                    },
+                    {
+                        "id": 6462465839,
+                        "qualifierId": 103,
+                        "value": "6.3"
+                    },
+                    {
+                        "id": 6462465841,
+                        "qualifierId": 214
+                    },
+                    {
+                        "id": 6462465843,
+                        "qualifierId": 136
+                    },
+                    {
+                        "id": 6462465845,
+                        "qualifierId": 230,
+                        "value": "97.6"
+                    },
+                    {
+                        "id": 6462465847,
+                        "qualifierId": 231,
+                        "value": "51.6"
+                    },
+                    {
+                        "id": 6462465849,
+                        "qualifierId": 138
+                    },
+                    {
+                        "id": 6462465851,
+                        "qualifierId": 273
+                    },
+                    {
+                        "id": 6462465853,
+                        "qualifierId": 322,
+                        "value": "0.858"
+                    },
+                    {
+                        "id": 6462465857,
+                        "qualifierId": 468,
+                        "value": "647"
+                    }
+                ]
+            }
+        ]
+    }
+}
