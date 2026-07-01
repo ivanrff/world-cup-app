@@ -9,6 +9,7 @@ from rich.progress import track
 from pathlib import Path
 from collections import Counter
 
+# Funções auxiliares
 def log(message):
     global run_log
     global run_id
@@ -33,7 +34,7 @@ def end_run(message=""):
 run_log = ""
 run_id = timestamp_suffix()
 
-# 1. PREPARANDO AS CREDENCIAIS (O que você já validou que funciona)
+# headers para o request
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:152.0) Gecko/20100101 Firefox/152.0',
     'Accept': '*/*',
@@ -47,7 +48,7 @@ tournament_id = "1mjq6w6ezkxe611ykkj8rgz7f1"
 
 fixtures_html_filepath = f'data/opta/fixture_htmls/[{run_id}]fixtures_{timestamp_suffix()}.html'
 
-# 2. CAPTURANDO OS IDS DOS JOGOS (Via HTML da página principal)
+# CAPTURANDO OS IDS DOS JOGOS (Via HTML da página principal)
 log(f"Accessing Opta's fixtures page...")
 try:
     fixtures_url = "https://theanalyst.com/competition/fifa-world-cup/fixtures"
@@ -68,12 +69,12 @@ except Exception as e:
 
 soup = BeautifulSoup(fixtures_html, 'html.parser')
 
-# Aqui pegamos os IDs das divs que contêm os confrontos.
+# Pegando o conteúdo JSON dentro de uma tag <script class="data" type="application/json">.
 container = soup.find('script', class_='data', type='application/json')
 
 if container:
     log("BeautifulSoup found the tag with the JSON containing the match ids. Extracting the data...")
-    # 2. Converte o texto do script em um dicionário Python
+    # Converte o texto do script em um dicionário Python
     try:
         page_data = json.loads(container.string)
     except Exception as e:
@@ -110,7 +111,7 @@ else:
     with open(f'data/opta/fixture_ids/[{run_id}]fixture_ids_{timestamp_suffix()}.json', 'w', encoding='utf-8') as file:
         json.dump(match_ids, file, indent=4, ensure_ascii=False)
 
-# 3. LOOP DE COLETA DAS PROBABILIDADES
+# Loop de coleta das probabilidades
 final_data = {}
 
 for match_id in track(match_ids, description="Processing match ids"):
@@ -133,7 +134,7 @@ for match_id in track(match_ids, description="Processing match ids"):
             if match:
                 jogo_json = json.loads(match.group(1))
                 
-                # Salva o resultado no nosso dicionário central usando o ID do jogo como chave
+                # Salva o resultado no dicionário central usando o ID do jogo como chave
                 final_data[match_id] = jogo_json
                 
         else:
@@ -142,17 +143,17 @@ for match_id in track(match_ids, description="Processing match ids"):
     except Exception as e:
         log(f"Falha ao processar jogo {match_id}: {e}")
     
-    # Boas práticas: dê um descanso de 1 segundo entre as requisições para não ser bloqueado por IP
+    # descanso de 1 segundo para não tomar block de IP
     time.sleep(1)
 
-# 4. SALVANDO TODOS OS JOGOS JUNTOS
+# Salva todos os jogos juntos
 fixtures_json_filepath = f'data/opta/fixture_jsons/[{run_id}]fixtures_json_{timestamp_suffix()}.json'
 with open(fixtures_json_filepath, 'w', encoding='utf-8') as file:
     json.dump(final_data, file, indent=4, ensure_ascii=False)
 
-log(f"Processo concluído! Todos os dados salvos em '{fixtures_json_filepath}'")
+log(f"Successfully finished processing. Saved data to '{fixtures_json_filepath}'")
 
-# save log into log/
+# Salvar o log no diretorio log/
 log_filepath = f'log/[{run_id}]opta_scrapper_log_{timestamp_suffix()}.txt'
 with open(log_filepath, 'w', encoding='utf-8') as log_file:
     log_file.write(run_log)
