@@ -8,6 +8,7 @@ from datetime import datetime
 from rich.progress import track
 from pathlib import Path
 from collections import Counter
+from src.get_played_match_ids import get_played_match_ids
 
 # Funções auxiliares
 def log(message):
@@ -113,6 +114,14 @@ else:
     log("No previous fixture ids file found. Saving the new list...")
     with open(f'data/opta/fixture_ids/[{run_id}]fixture_ids_{timestamp_suffix()}.json', 'w', encoding='utf-8') as file:
         json.dump(match_ids, file, indent=4, ensure_ascii=False)
+
+# get played match ids to not repeat the same request every time
+played_match_ids = get_played_match_ids(log)
+
+if played_match_ids:
+    match_ids = [id for id in match_ids if id not in played_match_ids]
+    log(f"Found {len(match_ids)} matches not played yet. Starting requests...")
+
 
 # Loop de coleta das probabilidades
 final_data = {}

@@ -28,6 +28,7 @@ for file in fixture_files:
         checker = {}
 
         checker['opta_match_id'] = id
+        checker['snapshot'] = pd.to_datetime(snapshot, format="%Y%m%d%H%M%S")
         # checker['match_id'] = i + 1
 
         matchInfo = match.get("matchInfo", None)
@@ -82,7 +83,6 @@ for file in fixture_files:
             checker['brier_score'] = home_error + draw_error + away_error
             checker['model_grade'] = (1 - (checker['brier_score'] / 2)) * 100
 
-        checker['snapshot'] = pd.to_datetime(snapshot, format="%Y%m%d%H%M%S")
         matches.append(checker)
     
     dataframe = pd.DataFrame(matches)
@@ -100,6 +100,7 @@ final_df['match_datetime_br'] = final_df["match_datetime"].dt.tz_convert(
 
 final_df = final_df.drop(columns=['match_datetime'])
 
+final_df['match_handle'] = final_df['home_code'] + ' x ' + final_df['away_code']
 
 conn = sqlite3.connect("data/db/world_cup.db")
 
