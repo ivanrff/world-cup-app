@@ -8,7 +8,7 @@ from datetime import datetime
 from rich.progress import track
 from pathlib import Path
 from collections import Counter
-from src.get_played_match_ids import get_played_match_ids
+from utils.get_played_match_ids import get_played_match_ids
 
 # Funções auxiliares
 def log(message):
@@ -47,7 +47,7 @@ headers = {
 # ID da competição (mantenha o que funcionou)
 tournament_id = "1mjq6w6ezkxe611ykkj8rgz7f1"
 
-fixtures_html_filepath = f'data/opta/fixture_htmls/[{run_id}]fixtures_{timestamp_suffix()}.html'
+fixtures_html_filepath = f'../data/opta/fixture_htmls/[{run_id}]fixtures_{timestamp_suffix()}.html'
 
 # CAPTURANDO OS IDS DOS JOGOS (Via HTML da página principal)
 log(f"Accessing Opta's fixtures page...")
@@ -95,24 +95,24 @@ for date_block in page_data.get("matchDate", []):
 log(f"Found a total of {len(match_ids)} match ids")
 
 # Checar se a lista é igual à anterior
-fixture_id_files = [f.name for f in Path('data/opta/fixture_ids').iterdir() if f.is_file()]
+fixture_id_files = [f.name for f in Path('../data/opta/fixture_ids').iterdir() if f.is_file()]
 latest_fixture_id_file = max(fixture_id_files) if fixture_id_files else None
 
 # comparar a lista de match_ids com o conteúdo do arquivo mais recente
 if latest_fixture_id_file:
     log("Found a list of fixture ids in data/opta/fixture_ids")
-    with open(f'data/opta/fixture_ids/{latest_fixture_id_file}', 'r', encoding='utf-8') as file:
+    with open(f'../data/opta/fixture_ids/{latest_fixture_id_file}', 'r', encoding='utf-8') as file:
         previous_match_ids = json.load(file)
 
     if Counter(match_ids) != Counter(previous_match_ids):
         log("The match ids are different from the previous ones. Saving the new list...")
-        with open(f'data/opta/fixture_ids/[{run_id}]fixture_ids_{timestamp_suffix()}.json', 'w', encoding='utf-8') as file:
+        with open(f'../data/opta/fixture_ids/[{run_id}]fixture_ids_{timestamp_suffix()}.json', 'w', encoding='utf-8') as file:
             json.dump(match_ids, file, indent=4, ensure_ascii=False)
     else:
         log("The match ids are the same from the recorded list. No need to save a new list.")
 else:
     log("No previous fixture ids file found. Saving the new list...")
-    with open(f'data/opta/fixture_ids/[{run_id}]fixture_ids_{timestamp_suffix()}.json', 'w', encoding='utf-8') as file:
+    with open(f'../data/opta/fixture_ids/[{run_id}]fixture_ids_{timestamp_suffix()}.json', 'w', encoding='utf-8') as file:
         json.dump(match_ids, file, indent=4, ensure_ascii=False)
 
 # get played match ids to not repeat the same request every time
@@ -159,7 +159,7 @@ for match_id in track(match_ids, description="Processing match ids"):
     time.sleep(1)
 
 # Salva todos os jogos juntos
-fixtures_json_filepath = f'data/opta/fixture_jsons/[{run_id}]fixtures_json_{timestamp_suffix()}.json'
+fixtures_json_filepath = f'../data/opta/fixture_jsons/[{run_id}]fixtures_json_{timestamp_suffix()}.json'
 with open(fixtures_json_filepath, 'w', encoding='utf-8') as file:
     json.dump(final_data, file, indent=4, ensure_ascii=False)
 
@@ -170,6 +170,6 @@ Path(fixtures_html_filepath).unlink(missing_ok=True)
 log(f"Deleted original html file.")
 
 # Salvar o log no diretorio log/
-log_filepath = f'log/[{run_id}]opta_scrapper_log_{timestamp_suffix()}.txt'
+log_filepath = f'../log/[{run_id}]opta_scrapper_log_{timestamp_suffix()}.txt'
 with open(log_filepath, 'w', encoding='utf-8') as log_file:
     log_file.write(run_log)

@@ -4,7 +4,7 @@ import json
 import pandas as pd
 import sqlite3
 
-fixture_files = [f.name for f in Path('data/opta/fixture_jsons').iterdir() if f.is_file()]
+fixture_files = [f.name for f in Path('../data/opta/fixture_jsons').iterdir() if f.is_file()]
 fixture_files.sort()
 
 dfs_list = []
@@ -12,7 +12,7 @@ dfs_list = []
 for file in fixture_files:
     # print(file)
     snapshot = file.split('f')[0][1:][:-1]
-    with open(f"data/opta/fixture_jsons/{file}", 'r', encoding='utf-8') as f:
+    with open(f"../data/opta/fixture_jsons/{file}", 'r', encoding='utf-8') as f:
         data = json.load(f)
 
     matches = []
@@ -102,7 +102,14 @@ final_df = final_df.drop(columns=['match_datetime'])
 
 final_df['match_handle'] = final_df['home_code'] + ' x ' + final_df['away_code']
 
-conn = sqlite3.connect("data/db/world_cup.db")
+played_df = final_df[final_df['match_status'].isin(['Played', 'TBD'])]
+other_df = final_df[~final_df['match_status'].isin(['Played', 'TBD'])]
+played_df_clean = played_df.drop_duplicates(subset=[col for col in final_df.columns if col != 'snapshot'], keep='last')
+test = pd.concat([played_df_clean, other_df])
+test = test.sort_values(by=['match_datetime_br', 'match_handle', 'snapshot'])
+test.to_csv("../test.csv", index=False)
+
+conn = sqlite3.connect("../data/db/world_cup.db")
 
 final_df.to_sql(
     name="opta_snapshots",  # Nome da tabela dentro do SQLite

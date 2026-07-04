@@ -9,7 +9,7 @@ def get_played_match_ids(log_func=None):
 
     # 2. Sobe os níveis necessários para chegar na raiz do projeto
     # Se o arquivo está em 'meu_projeto/src/seu_script.py', o .parent.parent volta para 'meu_projeto/'
-    project_root = current_file.parent.parent
+    project_root = current_file.parent.parent.parent
 
     # 3. Constrói o caminho absoluto exato até o banco de dados
     db_path = project_root / "data" / "db" / "world_cup.db"
