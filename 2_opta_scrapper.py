@@ -99,6 +99,7 @@ latest_fixture_id_file = max(fixture_id_files) if fixture_id_files else None
 
 # comparar a lista de match_ids com o conteúdo do arquivo mais recente
 if latest_fixture_id_file:
+    log("Found a list of fixture ids in data/opta/fixture_ids")
     with open(f'data/opta/fixture_ids/{latest_fixture_id_file}', 'r', encoding='utf-8') as file:
         previous_match_ids = json.load(file)
 
@@ -106,6 +107,8 @@ if latest_fixture_id_file:
         log("The match ids are different from the previous ones. Saving the new list...")
         with open(f'data/opta/fixture_ids/[{run_id}]fixture_ids_{timestamp_suffix()}.json', 'w', encoding='utf-8') as file:
             json.dump(match_ids, file, indent=4, ensure_ascii=False)
+    else:
+        log("The match ids are the same from the recorded list. No need to save a new list.")
 else:
     log("No previous fixture ids file found. Saving the new list...")
     with open(f'data/opta/fixture_ids/[{run_id}]fixture_ids_{timestamp_suffix()}.json', 'w', encoding='utf-8') as file:
@@ -152,6 +155,10 @@ with open(fixtures_json_filepath, 'w', encoding='utf-8') as file:
     json.dump(final_data, file, indent=4, ensure_ascii=False)
 
 log(f"Successfully finished processing. Saved data to '{fixtures_json_filepath}'")
+
+Path(fixtures_html_filepath).unlink(missing_ok=True)
+
+log(f"Deleted original html file.")
 
 # Salvar o log no diretorio log/
 log_filepath = f'log/[{run_id}]opta_scrapper_log_{timestamp_suffix()}.txt'

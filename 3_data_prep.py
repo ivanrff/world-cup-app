@@ -2,8 +2,8 @@
 # %%
 import pandas as pd
 
-matches = pd.read_csv("archive/matches.csv")
-teams = pd.read_csv("archive/teams.csv")
+matches = pd.read_csv("data/kaggle/matches.csv")
+teams = pd.read_csv("data/kaggle/teams.csv")
 
 matches['timestamp'] = pd.to_datetime(matches['date'] + " " + matches['kickoff_time_utc'], format="%Y-%m-%d %H:%M", errors='raise')
 
