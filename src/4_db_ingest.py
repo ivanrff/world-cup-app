@@ -114,7 +114,7 @@ final_df['match_handle'] = final_df['home_code'] + ' x ' + final_df['away_code']
 # removendo as linhas repetidas de partidas já jogadas
 played_df = final_df[final_df['match_status'].isin(['Played', 'TBD'])]
 other_df = final_df[~final_df['match_status'].isin(['Played', 'TBD'])]
-final_df_clean = played_df.drop_duplicates(subset=[col for col in final_df.columns if col != 'snapshot_br'], keep='last')
+final_df_clean = played_df.drop_duplicates(subset=[col for col in final_df.columns if col not in ['snapshot_br', 'final_whistle_br']], keep='last')
 final_df_clean = pd.concat([final_df_clean, other_df])
 
 # salvando para visualizar em csv
@@ -131,5 +131,5 @@ final_df_clean.to_sql(
 
 conn.close()
 
-final_df.head(5)
+final_df_clean.head(5)
 # %%
