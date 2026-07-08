@@ -133,6 +133,11 @@ final_snapshots_df['brier_score'] = final_snapshots_df['home_error'] + final_sna
 final_snapshots_df['model_grade'] = (1 - (final_snapshots_df['brier_score'] / 2)) * 100
 final_snapshots_df = final_snapshots_df.drop(columns=['home_outcome', 'draw_outcome', 'away_outcome', 'home_error', 'draw_error', 'away_error'])
 
+final_snapshots_df['prediction_time'] = final_snapshots_df.apply(
+    lambda row: 'future' if row['final_whistle_br'] > row['snapshot_br'] else 'past', 
+    axis=1
+)
+
 # salvando para visualizar em csv
 final_snapshots_df.sort_values(by=['match_datetime_br', 'final_whistle_br', 'snapshot_br']).to_csv("../test.csv", index=False)
 
