@@ -36,8 +36,8 @@ for file in fixture_files:
         matchInfo = match.get("matchInfo", None)
 
         if not matchInfo:
-            checker['match_status'] = 'TBD'
-            matches.append(checker)
+            # checker['match_status'] = 'TBD'
+            # matches.append(checker)
             continue
 
         checker['match_datetime'] = pd.to_datetime(matchInfo['date'] + matchInfo['time'], format="%Y-%m-%dZ%H:%M:%S%z")
@@ -70,8 +70,8 @@ for file in fixture_files:
                     checker['final_whistle'] = pd.to_datetime(period['end'])
 
 
-            checker['home_score'] = match_results['scores']['ft']['home']
-            checker['away_score'] = match_results['scores']['ft']['away']
+            checker['home_score'] = match_results['scores']['total']['home']
+            checker['away_score'] = match_results['scores']['total']['away']
             if checker['home_score'] > checker['away_score']:
                 checker['result'] = 'Home Win'
                 home_outcome, draw_outcome, away_outcome = 1, 0, 0
@@ -94,35 +94,44 @@ for file in fixture_files:
     dataframe = pd.DataFrame(matches)
     dfs_list.append(dataframe)
 
-final_df = pd.concat(dfs_list, ignore_index=True)
+snapshots_df = pd.concat(dfs_list, ignore_index=True)
 
 # deixando as colunas lower case para consistencia
-final_df.columns = [col.lower() for col in final_df.columns]
+snapshots_df.columns = [col.lower() for col in snapshots_df.columns]
 
 # colocando as coluans numéricas como números
 for col in ['home_proba', 'away_proba', 'draw_proba', 'home_score', 'away_score']:
-    final_df[col] = pd.to_numeric(final_df[col])
+    snapshots_df[col] = pd.to_numeric(snapshots_df[col])
 
 # Convertendo as datas para horario de brasilia
-final_df['match_datetime_br'] = to_br_timezone(final_df["match_datetime"])
-final_df['final_whistle_br'] = to_br_timezone(final_df["final_whistle"])
-final_df = final_df.drop(columns=['match_datetime', 'final_whistle'])
+snapshots_df['match_datetime_br'] = to_br_timezone(snapshots_df["match_datetime"])
+snapshots_df['final_whistle_br'] = to_br_timezone(snapshots_df["final_whistle"])
+snapshots_df = snapshots_df.drop(columns=['match_datetime', 'final_whistle'])
 
 # criando a coluna de handles. Ex.: 'BRA x FRA'
-final_df['match_handle'] = final_df['home_code'] + ' x ' + final_df['away_code']
+snapshots_df['match_handle'] = snapshots_df['home_code'] + ' x ' + snapshots_df['away_code']
+
+# removendo as linhas TBD
+# snapshots_df = snapshots_df[snapshots_df['match_status'] != 'TBD'].copy()
 
 # removendo as linhas repetidas de partidas já jogadas
-played_df = final_df[final_df['match_status'].isin(['Played', 'TBD'])]
-other_df = final_df[~final_df['match_status'].isin(['Played', 'TBD'])]
-final_df_clean = played_df.drop_duplicates(subset=[col for col in final_df.columns if col not in ['snapshot_br', 'final_whistle_br']], keep='last')
-final_df_clean = pd.concat([final_df_clean, other_df])
+played_df = snapshots_df[snapshots_df['match_status'] == 'Played'].copy()
+not_played_df = snapshots_df[snapshots_df['match_status'] != 'Played'].copy()
+played_df_clean = played_df.drop_duplicates(subset=[col for col in snapshots_df.columns if col not in ['snapshot_br', 'final_whistle_br']], keep='last')
+snapshots_df = pd.concat([played_df_clean, not_played_df])
+
+# adicionando os resultados das partidas em todas linhas (até as no futuro do snapshot)
+snapshots_df = snapshots_df.drop(columns=['home_score', 'away_score', 'result', 'final_whistle_br'])
+played_subdf = played_df_clean[['opta_match_id', 'home_score', 'away_score', 'result', 'final_whistle_br', 'match_handle']]
+
+final_snapshots_df = snapshots_df.merge(played_subdf, how='left', on=['opta_match_id', 'match_handle'])
 
 # salvando para visualizar em csv
-final_df_clean.sort_values(by=['match_datetime_br', 'final_whistle_br', 'snapshot_br']).to_csv("../test.csv", index=False)
+final_snapshots_df.sort_values(by=['match_datetime_br', 'final_whistle_br', 'snapshot_br']).to_csv("../test.csv", index=False)
 
 conn = sqlite3.connect("../data/db/world_cup.db")
 
-final_df_clean.to_sql(
+final_snapshots_df.to_sql(
     name="opta_snapshots",  # Nome da tabela dentro do SQLite
     con=conn,  # A conexão que abrimos acima
     if_exists="replace",  # 'append' adiciona os dados novos. 'replace' reconstrói a tabela do zero.
@@ -130,6 +139,4 @@ final_df_clean.to_sql(
 )
 
 conn.close()
-
-final_df_clean.head(5)
 # %%

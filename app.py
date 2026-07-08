@@ -16,6 +16,7 @@ def load_data():
     
     # Garantir que a coluna de snapshot seja datetime
     df['snapshot_br'] = pd.to_datetime(df['snapshot_br'])
+    df['final_whistle_br'] = pd.to_datetime(df['final_whistle_br'])
     return df
 
 df = load_data().sort_values(by='final_whistle_br')
@@ -28,16 +29,31 @@ st.sidebar.header("Filtros")
 selected_snapshot = st.sidebar.selectbox("Selecione o snapshot:", (df['snapshot_br'].sort_values().unique()))
 
 if selected_snapshot:
-    df_filtered = df[df['snapshot_br'] <= selected_snapshot]
+    df_filtered = df[df['final_whistle_br'] <= selected_snapshot]
+    df_future = df[(df['final_whistle_br'] >= selected_snapshot) & (df['match_status'] == "Played")]
 else:
     df_filtered = df
 
+
+meses_pt = {
+    1: "de Janeiro", 2: "de Fevereiro", 3: "de Março", 4: "de Abril",
+    5: "de Maio", 6: "de Junho", 7: "de Julho", 8: "de Agosto",
+    9: "de Setembro", 10: "de Outubro", 11: "de Novembro", 12: "de Dezembro"
+}
+
+# Cria a string no formato: "dd de [Mês Extenso] hh:mm"
+df_filtered['data_extenso'] = (
+    df_filtered['final_whistle_br'].dt.strftime('%d ') + 
+    df_filtered['final_whistle_br'].dt.month.map(meses_pt) + 
+    df_filtered['final_whistle_br'].dt.strftime(', %H:%M')
+)
+
 # --- Layout Principal ---
-st.title("📊 Painel de Previsões da Opta")
+st.title("Painel de Previsões da Opta")
 
 # Exibir os dados em tabela (usando o data_editor para permitir ordenação)
-st.subheader("Snapshot mais recente")
-st.dataframe(df_filtered.sort_values(by='final_whistle_br'))
+st.subheader("Resultados futuros do snapshot")
+st.dataframe(df_future.sort_values(by='final_whistle_br'))
 
 # --- Exemplo de Gráfico: Evolução das Probabilidades ---
     
@@ -45,10 +61,41 @@ st.dataframe(df_filtered.sort_values(by='final_whistle_br'))
 fig = px.line(
     df_filtered, 
     x='final_whistle_br', 
-    y=['model_grade'],
-    title=f"Desempenho do modelo"
+    y='model_grade',
+    title="Desempenho do modelo",
+    custom_data=['home_code', 'away_code', 'home_proba', 'away_proba', 'draw_proba', 'match_handle', 'brier_score', 'home_score', 'away_score', 'data_extenso', 'stage']
 )
-st.plotly_chart(fig, use_container_width=True)
+
+fig.update_traces(
+    hovertemplate="<b>%{customdata[5]}</b><br>" +
+                "<b>%{customdata[10]}</b><br>" +
+                "-<br>" +
+                "<b>%{customdata[0]} Vence:</b> %{customdata[2]}%<br>" +
+                "<b>%{customdata[1]} Vence:</b> %{customdata[3]}%<br>" +
+                "<b>Empate:</b> %{customdata[4]}%<br>" +
+                "-<br>" +
+                "<b>Resultado Final:</b> %{customdata[0]} %{customdata[7]}-%{customdata[8]} %{customdata[1]}<br>" +
+                "<b>Data do Fim:</b> %{customdata[9]}<br>" +
+                "<b>Brier Score:</b> %{customdata[6]:.4f}<br>" +
+                "<b>Desempenho da Opta:</b> %{y:.2f}%<br>" +
+                "<extra></extra>" # Esse <extra> vazio serve para sumir com a caixa lateral com o nome da coluna
+)
+
+fig.update_layout(
+    xaxis_title="Apito Final (Horário de Brasília)",
+    yaxis_title="Desempenho (0 a 100)",
+    showlegend=False
+)
+
+st.plotly_chart(fig, use_container_width=True, width='stretch')
+
+## -- AVG SCORES -- 
+
+st.subheader("Brier Score")
+st.metric("Brier Score Médio", df_filtered['brier_score'].mean())
+
+st.subheader("Desempenho Médio")
+st.metric("Desempenho Médio", df_filtered['model_grade'].mean())
 
 # # --- Exemplo de Gráfico: Evolução das Probabilidades ---
 # st.subheader("Evolução das Previsões por Jogo")

@@ -9,6 +9,7 @@ from rich.progress import track
 from pathlib import Path
 from collections import Counter
 from utils.get_played_match_ids import get_played_match_ids
+from scrap_qualify_predictions import save_qualify_predictions_json
 
 # Funções auxiliares
 def log(message):
@@ -142,9 +143,9 @@ for match_id in track(match_ids, description="Processing match ids"):
         response = requests.get(url_api, params=params, headers=headers)
         
         if response.status_code == 200:
-            match = re.search(r'\((.*)\)', response.text)
+            match = re.search(r'\((.*)\)', response.text) # busca tudo que está dentro de parênteses, para limpar os caracteres que vem antes do json de verdade
             if match:
-                jogo_json = json.loads(match.group(1))
+                jogo_json = json.loads(match.group(1)) # 0 é a resposta crua, 1 é o resultado do regex
                 
                 # Salva o resultado no dicionário central usando o ID do jogo como chave
                 final_data[match_id] = jogo_json
@@ -168,6 +169,8 @@ log(f"Successfully finished processing. Saved data to '{fixtures_json_filepath}'
 Path(fixtures_html_filepath).unlink(missing_ok=True)
 
 log(f"Deleted original html file.")
+
+save_qualify_predictions_json(log, end_run, timestamp_suffix, run_id)
 
 # Salvar o log no diretorio log/
 log_filepath = f'../log/[{run_id}]opta_scrapper_log_{timestamp_suffix()}.txt'
