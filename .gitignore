@@ -7,5 +7,4 @@ notes.md
 *.json
 .complete
 log/
-*.db
 __pycache__

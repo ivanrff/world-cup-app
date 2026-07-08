@@ -72,6 +72,22 @@ fig = px.line(
     custom_data=['home_code', 'away_code', 'home_proba', 'away_proba', 'draw_proba', 'match_handle', 'brier_score', 'home_score', 'away_score', 'data_extenso', 'stage']
 )
 
+fig.add_vrect(
+    x0="2026-06-11", x1="2026-06-28 11:00", # Ajuste a data inicial de acordo com o seu primeiro jogo
+    fillcolor="rgba(255, 255, 255, 0.08)", # Um toque sutil de brilho no fundo
+    layer="below", line_width=0, # Garante que fica ATRÁS da linha do gráfico
+    annotation_text="Fase de Grupos", annotation_position="bottom left",
+    annotation_font=dict(size=14, color="gray")
+)
+
+fig.add_vrect(
+    x0="2026-06-28 12:00", x1="2026-07-15", # Ajuste a data final com o último jogo mapeado
+    fillcolor="rgba(31, 119, 180, 0.12)", # Um tom levemente azulado ao fundo para diferenciar
+    layer="below", line_width=0,
+    annotation_text="Eliminatórias", annotation_position="bottom left",
+    annotation_font=dict(size=14, color="#1f77b4")
+)
+
 fig.update_traces(
     hovertemplate="<b>%{customdata[5]}</b><br>" +
                 "<b>%{customdata[10]}</b><br>" +

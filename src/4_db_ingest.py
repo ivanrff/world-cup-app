@@ -69,8 +69,17 @@ for file in fixture_files:
                 if period['id'] == len(match_results['period']):
                     checker['final_whistle'] = pd.to_datetime(period['end'])
 
-            checker['home_score'] = match_results['scores']['total']['home']
-            checker['away_score'] = match_results['scores']['total']['away']
+            final_time = match_results['scores'].get('ft')
+            extra_time = match_results['scores'].get('et')
+            # penalties = match_results['scores'].get('pen')
+
+            if extra_time:
+                checker['home_score'] = extra_time['home']
+                checker['away_score'] = extra_time['away']
+            else:
+                checker['home_score'] = final_time['home']
+                checker['away_score'] = final_time['away']
+
             if checker['home_score'] > checker['away_score']:
                 checker['result'] = 'Home Win'
                 checker['home_outcome'] = 1
