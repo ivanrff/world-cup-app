@@ -5,7 +5,7 @@ import plotly.express as px
 from datetime import datetime
 
 # Configuração da página para ficar larga e aproveitar melhor o espaço
-st.set_page_config(layout="wide", page_title="Análise das Previsões do \"Supercomputador\" Opta")
+st.set_page_config(layout="wide", page_title="Previsões do \"Supercomputador\" Opta")
 
 # Função com cache para ler o banco de dados
 # O @st.cache_data evita que o app leia o arquivo o tempo todo ao interagir com o site
@@ -52,7 +52,7 @@ df_filtered['data_extenso'] = (
 )
 
 # --- Layout Principal ---
-st.title("Análise das Previsões do \"Supercomputador\" Opta")
+st.title("Previsões do \"Supercomputador\" Opta")
 
 # Exibir os dados em tabela (usando o data_editor para permitir ordenação)
 # st.subheader("Resultados futuros do snapshot")
