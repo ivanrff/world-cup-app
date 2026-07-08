@@ -69,25 +69,23 @@ for file in fixture_files:
                 if period['id'] == len(match_results['period']):
                     checker['final_whistle'] = pd.to_datetime(period['end'])
 
-
             checker['home_score'] = match_results['scores']['total']['home']
             checker['away_score'] = match_results['scores']['total']['away']
             if checker['home_score'] > checker['away_score']:
                 checker['result'] = 'Home Win'
-                home_outcome, draw_outcome, away_outcome = 1, 0, 0
+                checker['home_outcome'] = 1
+                checker['draw_outcome'] = 0
+                checker['away_outcome'] = 0
             elif checker['home_score'] < checker['away_score']:
                 checker['result'] = 'Away Win'
-                home_outcome, draw_outcome, away_outcome = 0, 0, 1
+                checker['home_outcome'] = 0
+                checker['draw_outcome'] = 0
+                checker['away_outcome'] = 1
             else:
                 checker['result'] = 'Draw'
-                home_outcome, draw_outcome, away_outcome = 0, 1, 0
-
-            home_error = (float(checker['home_proba']) / 100 - home_outcome) ** 2
-            draw_error = (float(checker['draw_proba']) / 100 - draw_outcome) ** 2
-            away_error = (float(checker['away_proba']) / 100 - away_outcome) ** 2
-
-            checker['brier_score'] = home_error + draw_error + away_error
-            checker['model_grade'] = (1 - (checker['brier_score'] / 2)) * 100
+                checker['home_outcome'] = 0
+                checker['draw_outcome'] = 1
+                checker['away_outcome'] = 0
 
         matches.append(checker)
     
@@ -121,10 +119,19 @@ played_df_clean = played_df.drop_duplicates(subset=[col for col in snapshots_df.
 snapshots_df = pd.concat([played_df_clean, not_played_df])
 
 # adicionando os resultados das partidas em todas linhas (até as no futuro do snapshot)
-snapshots_df = snapshots_df.drop(columns=['home_score', 'away_score', 'result', 'final_whistle_br'])
-played_subdf = played_df_clean[['opta_match_id', 'home_score', 'away_score', 'result', 'final_whistle_br', 'match_handle']]
+snapshots_df = snapshots_df.drop(columns=['home_score', 'away_score', 'result', 'final_whistle_br', 'home_outcome', 'draw_outcome', 'away_outcome'])
+played_subdf = played_df_clean[['opta_match_id', 'match_handle', 'final_whistle_br', 'home_score', 'away_score', 'result', 'home_outcome', 'draw_outcome', 'away_outcome']]
 
 final_snapshots_df = snapshots_df.merge(played_subdf, how='left', on=['opta_match_id', 'match_handle'])
+
+# calculando o desempenho do modelo
+final_snapshots_df['home_error'] = (final_snapshots_df['home_proba'] / 100 - final_snapshots_df['home_outcome']) ** 2
+final_snapshots_df['draw_error'] = (final_snapshots_df['draw_proba'] / 100 - final_snapshots_df['draw_outcome']) ** 2
+final_snapshots_df['away_error'] = (final_snapshots_df['away_proba'] / 100 - final_snapshots_df['away_outcome']) ** 2
+
+final_snapshots_df['brier_score'] = final_snapshots_df['home_error'] + final_snapshots_df['draw_error'] + final_snapshots_df['away_error']
+final_snapshots_df['model_grade'] = (1 - (final_snapshots_df['brier_score'] / 2)) * 100
+final_snapshots_df = final_snapshots_df.drop(columns=['home_outcome', 'draw_outcome', 'away_outcome', 'home_error', 'draw_error', 'away_error'])
 
 # salvando para visualizar em csv
 final_snapshots_df.sort_values(by=['match_datetime_br', 'final_whistle_br', 'snapshot_br']).to_csv("../test.csv", index=False)
