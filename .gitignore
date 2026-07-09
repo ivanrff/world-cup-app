@@ -8,3 +8,5 @@ notes.md
 .complete
 log/
 __pycache__
+.readmeaiignore
+readme-ai.md
