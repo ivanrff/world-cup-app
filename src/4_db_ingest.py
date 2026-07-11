@@ -62,9 +62,9 @@ for file in fixture_files:
             try:
                 checker[f'{position}_flag'] = cf.getflag([checker[f'{position}_name']])
             except:
-                print(f"{[checker[f'{position}_name']]} flag not found.")
+                # print(f"{[checker[f'{position}_name']]} flag not found.")
                 if checker[f'{position}_name'] == 'Scotland':
-                   print("forcing the emoji")
+                #    print("forcing the emoji")
                    checker[f'{position}_flag'] = "🏴󠁧󠁢󠁳󠁣󠁴󠁿"
 
         preMatchPredictions = match['liveData']['preMatchPredictions']

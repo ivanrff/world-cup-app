@@ -30,24 +30,36 @@ df = df[(df['match_status'] != "TBD")].copy()
 
 # --- Sidebar para filtros ---
 st.sidebar.header("Filtros")
-selected_snapshot = st.sidebar.selectbox(label="Escolha o snapshot:", options=(df['snapshot_br'].sort_values().unique()), index=None, placeholder="Snapshot")
 
-nations = ((pd.concat([df['home_name_br'], df['away_name_br']])).sort_values(key=lambda x: x.map(locale.strxfrm)).unique())
-selected_nation = st.sidebar.selectbox(label="Escolha a Seleção", options=nations, index=None, placeholder="Seleção")
+# Selecione um snapshot
+snapshots = df['snapshot_br'].sort_values().unique()
+selected_snapshot = st.sidebar.selectbox(label="Escolha o snapshot:", options=snapshots, index=None, placeholder="Snapshot")
+
+# Selecione uma nação
+home_nations = df[['home_name_br', 'home_flag']]
+away_nations = df[['away_name_br', 'away_flag']]
+home_nations.columns = ['nation_name_br', 'nation_flag']
+away_nations.columns = ['nation_name_br', 'nation_flag']
+
+nations_and_emojis = pd.concat([home_nations, away_nations], ignore_index=True, axis=0).drop_duplicates(keep='first').sort_values(by='nation_name_br', key=lambda x: x.map(locale.strxfrm))
+nations_and_emojis['name_and_emoji'] = nations_and_emojis['nation_flag'] + " " + nations_and_emojis['nation_name_br']
+# st.dataframe(nations_and_emojis)
+nations = nations_and_emojis['name_and_emoji'] # lista de nações
+selected_nation = st.sidebar.selectbox(label="Escolha a Seleção", options=nations, index=None, placeholder="Seleção") # caixa de seleção
 
 if selected_snapshot:
-    # df_filtered = df[df['snapshot_br'] == selected_snapshot]
-    df_past = df[(df['final_whistle_br'] <= selected_snapshot) & (df['match_status'] == 'Played')]
-    df_future = df[(df['prediction_time'] == 'future') & (df['snapshot_br'] == selected_snapshot)]
-    df_filtered = pd.concat([df_past, df_future])
+    latest_snapshot = selected_snapshot
 else:
     # If no selected snapshot, get the most recent one
-    unselected_snapshot = df['snapshot_br'].sort_values().unique().max()
-    df_past = df[(df['final_whistle_br'] <= unselected_snapshot) & (df['match_status'] == 'Played')]
-    df_future = df[(df['prediction_time'] == 'future') & (df['snapshot_br'] == unselected_snapshot)]
-    df_filtered = pd.concat([df_past, df_future])
+    latest_snapshot = df['snapshot_br'].sort_values().unique().max()
+
+# filtering snapshots so they dont overlap
+df_past = df[(df['final_whistle_br'] <= latest_snapshot) & (df['match_status'] == 'Played')]
+df_future = df[(df['prediction_time'] == 'future') & (df['snapshot_br'] == latest_snapshot)]
+df_filtered = pd.concat([df_past, df_future])
 
 if selected_nation:
+    selected_nation = selected_nation.split(" ", 1)[1]
     df_filtered = df_filtered[(df_filtered['home_name_br'] == selected_nation) | (df_filtered['away_name_br'] == selected_nation)]
 
 meses_pt = {
@@ -82,8 +94,8 @@ fig = px.line(
     markers=True,
     title="Desempenho do modelo",
     custom_data=[
-                'home_code', # 0
-                'away_code', # 1
+                'home_name_br', # 0
+                'away_name_br', # 1
                 'stage', # 2
                 'home_proba', # 3
                 'away_proba', # 4
@@ -100,14 +112,14 @@ fig = px.line(
 # https://api.fifa.com/api/v3/picture/flags-sq-2/{}
 
 fig.update_traces(
-    hovertemplate="<b>%{customdata[10]} %{customdata[0]} vs %{customdata[11]} %{customdata[1]}</b><br>" +
+    hovertemplate="<b>%{customdata[10]} %{customdata[0]} x %{customdata[11]} %{customdata[1]}</b><br>" +
                 "<b>%{customdata[2]}</b><br>" +
                 "-<br>" +
                 "<b>%{customdata[0]} Vence:</b> %{customdata[3]}%<br>" +
                 "<b>%{customdata[1]} Vence:</b> %{customdata[4]}%<br>" +
                 "<b>Empate:</b> %{customdata[5]}%<br>" +
                 "-<br>" +
-                "<b>Resultado Final:</b> %{customdata[0]} %{customdata[6]}-%{customdata[7]} %{customdata[1]}<br>" +
+                "<b>Resultado Final:</b> %{customdata[10]} %{customdata[6]}-%{customdata[7]} %{customdata[11]}<br>" +
                 "<b>Data do Fim:</b> %{customdata[8]}<br>" +
                 "<b>Brier Score:</b> %{customdata[9]:.4f}<br>" +
                 "<b>Desempenho da Opta:</b> %{y:.2f}%<br>" +
@@ -129,6 +141,8 @@ fig.add_vrect(
     annotation_text="Eliminatórias", annotation_position="bottom left",
     annotation_font=dict(size=14, color="#1f77b4")
 )
+
+fig.add_vline(x=latest_snapshot, line_color="red")
 
 fig.update_layout(
     xaxis_title="",
