@@ -3,7 +3,9 @@ import pandas as pd
 import sqlite3
 import plotly.express as px
 from datetime import datetime, timedelta
+import locale
 
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 # Configuração da página para ficar larga e aproveitar melhor o espaço
 st.set_page_config(layout="wide", page_title="Previsões do \"Supercomputador\" Opta")
@@ -28,7 +30,10 @@ df = df[(df['match_status'] != "TBD")].copy()
 
 # --- Sidebar para filtros ---
 st.sidebar.header("Filtros")
-selected_snapshot = st.sidebar.selectbox("Selecione o snapshot:", (df['snapshot_br'].sort_values().unique()))
+selected_snapshot = st.sidebar.selectbox(label="Escolha o snapshot:", options=(df['snapshot_br'].sort_values().unique()), index=None, placeholder="Snapshot")
+
+nations = ((pd.concat([df['home_name_br'], df['away_name_br']])).sort_values(key=lambda x: x.map(locale.strxfrm)).unique())
+selected_nation = st.sidebar.selectbox(label="Escolha a Seleção", options=nations, index=None, placeholder="Seleção")
 
 if selected_snapshot:
     # df_filtered = df[df['snapshot_br'] == selected_snapshot]
@@ -36,8 +41,14 @@ if selected_snapshot:
     df_future = df[(df['prediction_time'] == 'future') & (df['snapshot_br'] == selected_snapshot)]
     df_filtered = pd.concat([df_past, df_future])
 else:
-    df_filtered = df
+    # If no selected snapshot, get the most recent one
+    unselected_snapshot = df['snapshot_br'].sort_values().unique().max()
+    df_past = df[(df['final_whistle_br'] <= unselected_snapshot) & (df['match_status'] == 'Played')]
+    df_future = df[(df['prediction_time'] == 'future') & (df['snapshot_br'] == unselected_snapshot)]
+    df_filtered = pd.concat([df_past, df_future])
 
+if selected_nation:
+    df_filtered = df_filtered[(df_filtered['home_name_br'] == selected_nation) | (df_filtered['away_name_br'] == selected_nation)]
 
 meses_pt = {
     1: "de Janeiro", 2: "de Fevereiro", 3: "de Março", 4: "de Abril",
@@ -81,13 +92,15 @@ fig = px.line(
                 'away_score', # 7
                 'data_extenso', # 8
                 'brier_score', # 9
+                'home_flag',
+                'away_flag'
             ]
 )
 
 # https://api.fifa.com/api/v3/picture/flags-sq-2/{}
 
 fig.update_traces(
-    hovertemplate="<b>[%{customdata[0]}] vs [%{customdata[1]}]</b><br>" +
+    hovertemplate="<b>%{customdata[10]} %{customdata[0]} vs %{customdata[11]} %{customdata[1]}</b><br>" +
                 "<b>%{customdata[2]}</b><br>" +
                 "-<br>" +
                 "<b>%{customdata[0]} Vence:</b> %{customdata[3]}%<br>" +

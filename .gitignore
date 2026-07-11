@@ -1,7 +1,8 @@
 .wc-env
 momentum
 .env
-*.csv
+/*.csv
+kaggle/
 notes.md
 *.html
 *.json
