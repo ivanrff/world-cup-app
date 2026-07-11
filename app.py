@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import sqlite3
 import plotly.express as px
-from datetime import datetime
+from datetime import datetime, timedelta
+
 
 # Configuração da página para ficar larga e aproveitar melhor o espaço
 st.set_page_config(layout="wide", page_title="Previsões do \"Supercomputador\" Opta")
@@ -69,7 +70,35 @@ fig = px.line(
     # color_discrete_map=cores_map,
     markers=True,
     title="Desempenho do modelo",
-    custom_data=['home_code', 'away_code', 'home_proba', 'away_proba', 'draw_proba', 'match_handle', 'brier_score', 'home_score', 'away_score', 'data_extenso', 'stage']
+    custom_data=[
+                'home_code', # 0
+                'away_code', # 1
+                'stage', # 2
+                'home_proba', # 3
+                'away_proba', # 4
+                'draw_proba', # 5
+                'home_score', # 6
+                'away_score', # 7
+                'data_extenso', # 8
+                'brier_score', # 9
+            ]
+)
+
+# https://api.fifa.com/api/v3/picture/flags-sq-2/{}
+
+fig.update_traces(
+    hovertemplate="<b>[%{customdata[0]}] vs [%{customdata[1]}]</b><br>" +
+                "<b>%{customdata[2]}</b><br>" +
+                "-<br>" +
+                "<b>%{customdata[0]} Vence:</b> %{customdata[3]}%<br>" +
+                "<b>%{customdata[1]} Vence:</b> %{customdata[4]}%<br>" +
+                "<b>Empate:</b> %{customdata[5]}%<br>" +
+                "-<br>" +
+                "<b>Resultado Final:</b> %{customdata[0]} %{customdata[6]}-%{customdata[7]} %{customdata[1]}<br>" +
+                "<b>Data do Fim:</b> %{customdata[8]}<br>" +
+                "<b>Brier Score:</b> %{customdata[9]:.4f}<br>" +
+                "<b>Desempenho da Opta:</b> %{y:.2f}%<br>" +
+                "<extra></extra>" # Esse <extra> vazio serve para sumir com a caixa lateral com o nome da coluna
 )
 
 fig.add_vrect(
@@ -88,31 +117,16 @@ fig.add_vrect(
     annotation_font=dict(size=14, color="#1f77b4")
 )
 
-fig.update_traces(
-    hovertemplate="<b>%{customdata[5]}</b><br>" +
-                "<b>%{customdata[10]}</b><br>" +
-                "-<br>" +
-                "<b>%{customdata[0]} Vence:</b> %{customdata[2]}%<br>" +
-                "<b>%{customdata[1]} Vence:</b> %{customdata[3]}%<br>" +
-                "<b>Empate:</b> %{customdata[4]}%<br>" +
-                "-<br>" +
-                "<b>Resultado Final:</b> %{customdata[0]} %{customdata[7]}-%{customdata[8]} %{customdata[1]}<br>" +
-                "<b>Data do Fim:</b> %{customdata[9]}<br>" +
-                "<b>Brier Score:</b> %{customdata[6]:.4f}<br>" +
-                "<b>Desempenho da Opta:</b> %{y:.2f}%<br>" +
-                "<extra></extra>" # Esse <extra> vazio serve para sumir com a caixa lateral com o nome da coluna
-)
-
 fig.update_layout(
     xaxis_title="",
     yaxis_title="Desempenho (0 a 100%)",
     showlegend=False
 )
 
-fig.update_xaxes(range=["2026-06-11", datetime.now().strftime(format="%Y-%m-%d")], tickformat="%d/%m")
+fig.update_xaxes(range=["2026-06-11", (datetime.now() + timedelta(days=1)).strftime(format="%Y-%m-%d")], tickformat="%d/%m")
 fig.update_yaxes(range=[0, 100])
 
-st.plotly_chart(fig, use_container_width=True, width='stretch')
+st.plotly_chart(fig, width='stretch')
 
 ## -- AVG SCORES -- 
 

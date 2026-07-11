@@ -3,6 +3,9 @@ from pathlib import Path
 import json
 import pandas as pd
 import sqlite3
+import countryflag as cf
+
+fifa_ranking_df = pd.read_csv('../data/etc/fifa_ranking_pre_wc.csv', encoding='utf-8')
 
 
 def to_br_timezone(column):
@@ -49,9 +52,17 @@ for file in fixture_files:
         
         for team in range(2):
             position = matchInfo['contestant'][team].get('position')
+            
             team_code = matchInfo['contestant'][team].get('code')
-
-            checker[f'{position}_code'] = team_code
+            checker[f'{position}_code'] = matchInfo['contestant'][team].get('code')
+            checker[f'{position}_name'] = matchInfo['contestant'][team].get('name')
+            # checker[f'{position}_official_name'] = matchInfo['contestant'][team].get('officialName')
+            # checker[f'{position}_short_name'] = matchInfo['contestant'][team].get('shortName')
+            checker[f'{position}_name_br'] = fifa_ranking_df.loc[fifa_ranking_df['IdCountry'] == team_code, "TeamName"].to_list()[0]
+            try:
+                checker[f'{position}_flag'] = cf.getflag([checker[f'{position}_name']])
+            except:
+                print(f"{[checker[f'{position}_name']]} flag not found.")
 
         preMatchPredictions = match['liveData']['preMatchPredictions']
 
@@ -97,7 +108,7 @@ for file in fixture_files:
                 checker['away_outcome'] = 0
 
         matches.append(checker)
-    
+
     dataframe = pd.DataFrame(matches)
     dfs_list.append(dataframe)
 
