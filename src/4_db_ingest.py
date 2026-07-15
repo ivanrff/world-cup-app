@@ -4,6 +4,7 @@ import json
 import pandas as pd
 import sqlite3
 import countryflag as cf
+from rich.progress import track
 
 fifa_ranking_df = pd.read_csv('../data/etc/fifa_ranking_pre_wc.csv', encoding='utf-8')
 
@@ -18,25 +19,27 @@ fixture_files = [f.name for f in Path('../data/opta/fixture_jsons').iterdir() if
 fixture_files.sort()
 
 dfs_list = []
-for file in fixture_files:
+event_dfs_list = []
+live_predictions_dfs_list = []
+match_events = {}
+played_matches = []
+for file in track(fixture_files, description="Processing files"):
 
     snapshot = file.split('f')[0][1:][:-1]
     with open(f"../data/opta/fixture_jsons/{file}", 'r', encoding='utf-8') as f:
         data = json.load(f)
 
     matches = []
-    for i, id in enumerate(data.keys()):
+    for match_id in data.keys():
 
-        match_id = id
-
-        match = data[match_id]
+        match_data = data[match_id]
 
         checker = {}
 
-        checker['opta_match_id'] = id
+        checker['opta_match_id'] = match_id
         checker['snapshot_br'] = pd.to_datetime(snapshot, format="%Y%m%d%H%M%S")
 
-        matchInfo = match.get("matchInfo", None)
+        matchInfo = match_data.get("matchInfo")
 
         if not matchInfo:
             # checker['match_status'] = 'TBD'
@@ -67,17 +70,17 @@ for file in fixture_files:
                 #    print("forcing the emoji")
                    checker[f'{position}_flag'] = "🏴󠁧󠁢󠁳󠁣󠁴󠁿"
 
-        preMatchPredictions = match['liveData']['preMatchPredictions']
+        preMatchPredictions = match_data['liveData']['preMatchPredictions']
 
         for prediction in preMatchPredictions:
             for type in prediction['prediction']:
                 checker[f"{type['type'].lower()}_proba"] = type['probability']
 
-        match_results = match['liveData']['matchDetails']
+        match_results = match_data['liveData']['matchDetails']
 
         checker['match_status'] = match_results['matchStatus']
 
-        if checker['match_status'] == 'Played':
+        if (checker['match_status'] == 'Played') & (match_id not in played_matches):
 
             for period in match_results['period']:
                 if period['id'] == len(match_results['period']):
@@ -110,10 +113,37 @@ for file in fixture_files:
                 checker['draw_outcome'] = 1
                 checker['away_outcome'] = 0
 
+            # i guess make a for for each qualifier inside each event
+            for event in match_data['liveData']['event']:
+                for qualifier in event['qualifier']:
+                    match_events.setdefault('opta_match_id', []).append(checker['opta_match_id'])
+                    match_events.setdefault("event_id", []).append(event["id"])
+                    match_events.setdefault("eventId", []).append(event["eventId"])
+                    match_events.setdefault("typeId", []).append(event["typeId"])
+                    match_events.setdefault("periodId", []).append(event["periodId"])
+                    match_events.setdefault("timeMin", []).append(event["timeMin"])
+                    match_events.setdefault("timeSec", []).append(event["timeSec"])
+                    match_events.setdefault("playerId", []).append(event.get("playerId"))
+                    match_events.setdefault("playerName", []).append(event.get("playerName"))
+                    match_events.setdefault("contestantId", []).append(event["contestantId"])
+                    match_events.setdefault("outcome", []).append(event["outcome"])
+                    match_events.setdefault("x", []).append(event["x"])
+                    match_events.setdefault("y", []).append(event["y"])
+                    match_events.setdefault("timeStamp", []).append(event["timeStamp"])
+                    match_events.setdefault("lastModified", []).append(event["lastModified"])
+                    match_events.setdefault("qualifier_id", []).append(qualifier["id"])
+                    match_events.setdefault("qualifierId", []).append(qualifier["qualifierId"])
+                    match_events.setdefault("value", []).append(qualifier.get("value", None))
+
+            played_matches.append(match_id)
         matches.append(checker)
 
     dataframe = pd.DataFrame(matches)
     dfs_list.append(dataframe)
+
+match_events_df = pd.DataFrame(match_events)
+# del match_events
+# match_events_df = match_events_df.drop_duplicates()
 
 snapshots_df = pd.concat(dfs_list, ignore_index=True)
 
@@ -136,10 +166,10 @@ snapshots_df['match_handle'] = snapshots_df['home_code'] + ' x ' + snapshots_df[
 # snapshots_df = snapshots_df[snapshots_df['match_status'] != 'TBD'].copy()
 
 # removendo as linhas repetidas de partidas já jogadas
-played_df = snapshots_df[snapshots_df['match_status'] == 'Played'].copy()
-not_played_df = snapshots_df[snapshots_df['match_status'] != 'Played'].copy()
-played_df_clean = played_df.drop_duplicates(subset=[col for col in snapshots_df.columns if col not in ['snapshot_br', 'final_whistle_br']], keep='last')
-snapshots_df = pd.concat([played_df_clean, not_played_df])
+# played_df = snapshots_df[snapshots_df['match_status'] == 'Played'].copy()
+# not_played_df = snapshots_df[snapshots_df['match_status'] != 'Played'].copy()
+# played_df_clean = played_df.drop_duplicates(subset=[col for col in snapshots_df.columns if col not in ['snapshot_br', 'final_whistle_br']], keep='last')
+# snapshots_df = pd.concat([played_df_clean, not_played_df])
 
 # adicionando os resultados das partidas em todas linhas (até as no futuro do snapshot)
 snapshots_df = snapshots_df.drop(columns=['home_score', 'away_score', 'result', 'final_whistle_br', 'home_outcome', 'draw_outcome', 'away_outcome'])
