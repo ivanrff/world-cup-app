@@ -22,7 +22,7 @@ dfs_list = []
 event_dfs_list = []
 live_predictions_dfs_list = []
 match_events = {}
-played_matches = []
+played_matches_ids = [] # saves the ids of played matches that were already processed
 for file in track(fixture_files, description="Processing files"):
 
     snapshot = file.split('f')[0][1:][:-1]
@@ -34,11 +34,6 @@ for file in track(fixture_files, description="Processing files"):
 
         match_data = data[match_id]
 
-        checker = {}
-
-        checker['opta_match_id'] = match_id
-        checker['snapshot_br'] = pd.to_datetime(snapshot, format="%Y%m%d%H%M%S")
-
         matchInfo = match_data.get("matchInfo")
 
         if not matchInfo:
@@ -46,28 +41,32 @@ for file in track(fixture_files, description="Processing files"):
             # matches.append(checker)
             continue
 
-        checker['match_datetime'] = pd.to_datetime(matchInfo['date'] + matchInfo['time'], format="%Y-%m-%dZ%H:%M:%S%z")
-
-        checker['stage'] = matchInfo['stage'].get('name')
+        checker = {
+            'opta_match_id': match_id,
+            'snapshot_br': pd.to_datetime(snapshot, format="%Y%m%d%H%M%S"),
+            'match_datetime': pd.to_datetime(matchInfo['date'] + matchInfo['time'], format="%Y-%m-%dZ%H:%M:%S%z"),
+            'stage': matchInfo['stage'].get('name')
+        }
 
         if checker['stage'].lower() == 'group stage':
             checker['group'] = matchInfo['series'].get('name')
         
         for team in range(2):
             position = matchInfo['contestant'][team].get('position')
-            
             team_code = matchInfo['contestant'][team].get('code')
-            checker[f'{position}_code'] = matchInfo['contestant'][team].get('code')
-            checker[f'{position}_name'] = matchInfo['contestant'][team].get('name')
+            team_name = matchInfo['contestant'][team].get('name')
+            
+            checker[f'{position}_code'] = team_code
+            checker[f'{position}_name'] = team_name
             # checker[f'{position}_official_name'] = matchInfo['contestant'][team].get('officialName')
             # checker[f'{position}_short_name'] = matchInfo['contestant'][team].get('shortName')
             checker[f'{position}_name_br'] = fifa_ranking_df.loc[fifa_ranking_df['IdCountry'] == team_code, "TeamName"].to_list()[0]
+            
             try:
-                checker[f'{position}_flag'] = cf.getflag([checker[f'{position}_name']])
+                checker[f'{position}_flag'] = cf.getflag([team_name])
+            # Scotland doesn't exist in the countryflag library, so we have to force it:
             except:
-                # print(f"{[checker[f'{position}_name']]} flag not found.")
                 if checker[f'{position}_name'] == 'Scotland':
-                #    print("forcing the emoji")
                    checker[f'{position}_flag'] = "🏴󠁧󠁢󠁳󠁣󠁴󠁿"
 
         preMatchPredictions = match_data['liveData']['preMatchPredictions']
@@ -80,7 +79,7 @@ for file in track(fixture_files, description="Processing files"):
 
         checker['match_status'] = match_results['matchStatus']
 
-        if (checker['match_status'] == 'Played') & (match_id not in played_matches):
+        if (checker['match_status'] == 'Played') & (match_id not in played_matches_ids):
 
             for period in match_results['period']:
                 if period['id'] == len(match_results['period']):
@@ -133,9 +132,9 @@ for file in track(fixture_files, description="Processing files"):
                     match_events.setdefault("lastModified", []).append(event["lastModified"])
                     match_events.setdefault("qualifier_id", []).append(qualifier["id"])
                     match_events.setdefault("qualifierId", []).append(qualifier["qualifierId"])
-                    match_events.setdefault("value", []).append(qualifier.get("value", None))
+                    match_events.setdefault("value", []).append(qualifier.get("value"))
 
-            played_matches.append(match_id)
+            played_matches_ids.append(match_id)
         matches.append(checker)
 
     dataframe = pd.DataFrame(matches)
@@ -172,8 +171,9 @@ snapshots_df['match_handle'] = snapshots_df['home_code'] + ' x ' + snapshots_df[
 # snapshots_df = pd.concat([played_df_clean, not_played_df])
 
 # adicionando os resultados das partidas em todas linhas (até as no futuro do snapshot)
+played_df = snapshots_df[snapshots_df['match_status'] == 'Played'].copy()
 snapshots_df = snapshots_df.drop(columns=['home_score', 'away_score', 'result', 'final_whistle_br', 'home_outcome', 'draw_outcome', 'away_outcome'])
-played_subdf = played_df_clean[['opta_match_id', 'match_handle', 'final_whistle_br', 'home_score', 'away_score', 'result', 'home_outcome', 'draw_outcome', 'away_outcome']]
+played_subdf = played_df[['opta_match_id', 'match_handle', 'final_whistle_br', 'home_score', 'away_score', 'result', 'home_outcome', 'draw_outcome', 'away_outcome']]
 
 final_snapshots_df = snapshots_df.merge(played_subdf, how='left', on=['opta_match_id', 'match_handle'])
 

@@ -135,7 +135,7 @@ fig.add_vrect(
 )
 
 fig.add_vrect(
-    x0="2026-06-28 12:00", x1="2026-07-15", # Ajuste a data final com o último jogo mapeado
+    x0="2026-06-28 12:00", x1="2026-07-20", # Ajuste a data final com o último jogo mapeado
     fillcolor="rgba(31, 119, 180, 0.12)", # Um tom levemente azulado ao fundo para diferenciar
     layer="below", line_width=0,
     annotation_text="Eliminatórias", annotation_position="bottom left",
