@@ -6,30 +6,27 @@ import sqlite3
 import countryflag as cf
 from rich.progress import track
 
-fifa_ranking_df = pd.read_csv('../data/etc/fifa_ranking_pre_wc.csv', encoding='utf-8')
-
-
 def to_br_timezone(column):
     converted_col = column.dt.tz_convert(
     "America/Sao_Paulo").dt.tz_localize(None)
 
     return converted_col
 
-fixture_files = [f.name for f in Path('../data/opta/fixture_jsons').iterdir() if f.is_file()]
-fixture_files.sort()
+fifa_ranking_df = pd.read_csv('../data/etc/fifa_ranking_pre_wc.csv', encoding='utf-8')
+fixture_files = sorted([f.name for f in Path('../data/opta/fixture_jsons').iterdir() if f.is_file()])
 
-dfs_list = []
-event_dfs_list = []
 live_predictions_dfs_list = []
-match_events = {}
-played_matches_ids = [] # saves the ids of played matches that were already processed
+
+matches_list = []
+event_dfs_list = []
+played_matches_ids = set() # saves the ids of played matches that were already processed
+
 for file in track(fixture_files, description="Processing files"):
 
     snapshot = file.split('f')[0][1:][:-1]
     with open(f"../data/opta/fixture_jsons/{file}", 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    matches = []
     for match_id in data.keys():
 
         match_data = data[match_id]
@@ -85,16 +82,11 @@ for file in track(fixture_files, description="Processing files"):
                 if period['id'] == len(match_results['period']):
                     checker['final_whistle'] = pd.to_datetime(period['end'])
 
-            final_time = match_results['scores'].get('ft')
-            extra_time = match_results['scores'].get('et')
-            # penalties = match_results['scores'].get('pen')
-
-            if extra_time:
-                checker['home_score'] = extra_time['home']
-                checker['away_score'] = extra_time['away']
-            else:
-                checker['home_score'] = final_time['home']
-                checker['away_score'] = final_time['away']
+            scores = match_results.get('scores', {})
+            score_data = scores.get('et') or scores.get('ft', {})
+            
+            checker['home_score'] = score_data.get('home')
+            checker['away_score'] = score_data.get('away')
 
             if checker['home_score'] > checker['away_score']:
                 checker['result'] = 'Home Win'
@@ -113,38 +105,49 @@ for file in track(fixture_files, description="Processing files"):
                 checker['away_outcome'] = 0
 
             # i guess make a for for each qualifier inside each event
-            for event in match_data['liveData']['event']:
-                for qualifier in event['qualifier']:
-                    match_events.setdefault('opta_match_id', []).append(checker['opta_match_id'])
-                    match_events.setdefault("event_id", []).append(event["id"])
-                    match_events.setdefault("eventId", []).append(event["eventId"])
-                    match_events.setdefault("typeId", []).append(event["typeId"])
-                    match_events.setdefault("periodId", []).append(event["periodId"])
-                    match_events.setdefault("timeMin", []).append(event["timeMin"])
-                    match_events.setdefault("timeSec", []).append(event["timeSec"])
-                    match_events.setdefault("playerId", []).append(event.get("playerId"))
-                    match_events.setdefault("playerName", []).append(event.get("playerName"))
-                    match_events.setdefault("contestantId", []).append(event["contestantId"])
-                    match_events.setdefault("outcome", []).append(event["outcome"])
-                    match_events.setdefault("x", []).append(event["x"])
-                    match_events.setdefault("y", []).append(event["y"])
-                    match_events.setdefault("timeStamp", []).append(event["timeStamp"])
-                    match_events.setdefault("lastModified", []).append(event["lastModified"])
-                    match_events.setdefault("qualifier_id", []).append(qualifier["id"])
-                    match_events.setdefault("qualifierId", []).append(qualifier["qualifierId"])
-                    match_events.setdefault("value", []).append(qualifier.get("value"))
+            events_data = match_data['liveData'].get('event', [])
+            if events_data:
+                df_events = pd.json_normalize(
+                    events_data,
+                    record_path=['qualifier'],
+                    meta=['id', 'eventId', 'typeId', 'periodId', 'timeMin', 'timeSec', 
+                          'playerId', 'playerName', 'contestantId', 'outcome', 'x', 'y', 
+                          'timeStamp', 'lastModified'],
+                    record_prefix='qualifier_', 
+                    errors='ignore'
+                )
+                df_events['opta_match_id'] = match_id
+                event_dfs_list.append(df_events)
 
-            played_matches_ids.append(match_id)
-        matches.append(checker)
+            live_predictions_data = match_data['liveData'].get('livePredictions', [])
+            if live_predictions_data:
+                df_live_predictions = pd.json_normalize(
+                    live_predictions_data,
+                    record_path=['prediction'],
+                    meta=["timeMin", "timeSec", "periodId"]
+                )
+                df_live_predictions['opta_match_id'] = match_id
+                live_predictions_dfs_list.append(df_live_predictions)
 
-    dataframe = pd.DataFrame(matches)
-    dfs_list.append(dataframe)
+            played_matches_ids.add(match_id) # .add() para sets, .append para listas
+        matches_list.append(checker)
 
-match_events_df = pd.DataFrame(match_events)
-# del match_events
-# match_events_df = match_events_df.drop_duplicates()
+# SNAPSHOTS DATAFRAME
+snapshots_df = pd.DataFrame(matches_list)
 
-snapshots_df = pd.concat(dfs_list, ignore_index=True)
+# EVENTS DATAFRAME
+match_events_df = pd.concat(event_dfs_list, ignore_index=True) if event_dfs_list else pd.DataFrame()
+
+# LIVE PREDICTIONS DATAFRAME
+match_live_predictions_df = pd.concat(live_predictions_dfs_list, ignore_index=True) if live_predictions_dfs_list else pd.DataFrame()
+match_live_predictions_df = match_live_predictions_df.drop_duplicates(subset=["type", "timeMin", "timeSec", "periodId", "opta_match_id"], keep='last')
+match_live_predictions_df = match_live_predictions_df.pivot(
+    index=["timeMin", "timeSec", "periodId", "opta_match_id"],
+    columns="type",
+    values="probability"
+).reset_index()
+match_live_predictions_df.columns.name = None
+match_live_predictions_df[['Home', 'Away', 'Draw']] = match_live_predictions_df[['Home', 'Away', 'Draw']].apply(pd.to_numeric)
 
 # deixando as colunas lower case para consistencia
 snapshots_df.columns = [col.lower() for col in snapshots_df.columns]
@@ -198,6 +201,20 @@ conn = sqlite3.connect("../data/db/world_cup.db")
 
 final_snapshots_df.to_sql(
     name="opta_snapshots",  # Nome da tabela dentro do SQLite
+    con=conn,  # A conexão que abrimos acima
+    if_exists="replace",  # 'append' adiciona os dados novos. 'replace' reconstrói a tabela do zero.
+    index=False,  # Não salva o índice do Pandas como uma coluna no banco
+)
+
+match_events_df.to_sql(
+    name="match_events",  # Nome da tabela dentro do SQLite
+    con=conn,  # A conexão que abrimos acima
+    if_exists="replace",  # 'append' adiciona os dados novos. 'replace' reconstrói a tabela do zero.
+    index=False,  # Não salva o índice do Pandas como uma coluna no banco
+)
+
+match_live_predictions_df.to_sql(
+    name="live_predictions",  # Nome da tabela dentro do SQLite
     con=conn,  # A conexão que abrimos acima
     if_exists="replace",  # 'append' adiciona os dados novos. 'replace' reconstrói a tabela do zero.
     index=False,  # Não salva o índice do Pandas como uma coluna no banco
