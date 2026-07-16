@@ -171,7 +171,7 @@ snapshots_df['final_whistle_br'] = to_br_timezone(snapshots_df["final_whistle"])
 snapshots_df = snapshots_df.drop(columns=['match_datetime', 'final_whistle'])
 
 # criando a coluna de handles. Ex.: 'BRA x FRA'
-snapshots_df['match_handle'] = snapshots_df['home_flag'] \
+snapshots_df['match_handle_results'] = snapshots_df['home_flag'] \
                                 + " " \
                                 + snapshots_df['home_code'] \
                                 + " " \
@@ -179,6 +179,15 @@ snapshots_df['match_handle'] = snapshots_df['home_flag'] \
                                 + ' x ' \
                                 + snapshots_df['away_score'].astype(str) \
                                 + " " \
+                                + snapshots_df['away_code'] \
+                                + " " \
+                                + snapshots_df['away_flag']
+
+
+snapshots_df['match_handle'] = snapshots_df['home_flag'] \
+                                + " " \
+                                + snapshots_df['home_code'] \
+                                + ' x ' \
                                 + snapshots_df['away_code'] \
                                 + " " \
                                 + snapshots_df['away_flag']

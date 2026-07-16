@@ -84,7 +84,7 @@ st.title("Previsões do \"Supercomputador\" Opta")
 
 # Exibir os dados em tabela (usando o data_editor para permitir ordenação)
 st.subheader("Resultados futuros do snapshot")
-# st.dataframe(df_filtered[['opta_match_id', 'match_handle']])
+# st.dataframe(df_filtered[['opta_match_id', 'match_handle_results']])
 # st.dataframe(df_live_predictions.head(df_live_predictions.shape[0]//2))
 
 # --- Exemplo de Gráfico: Evolução das Probabilidades ---
@@ -200,12 +200,12 @@ with col2:
 
 # --- Exemplo de Gráfico: Evolução das Probabilidades ---
 st.subheader("Evolução das Previsões por Jogo")
-match_ids = df_filtered['match_handle'].unique()
+match_ids = df_filtered['match_handle_results'].unique()
 selected_match = st.selectbox("Escolha um jogo para ver a tendência:", match_ids)
 
 if selected_match:
-    df_live_predictions = df_live_predictions.merge(df_filtered[['match_handle', 'opta_match_id']], how='right', on='opta_match_id')
-    match_data = df_live_predictions[(df_live_predictions['match_handle'] == selected_match) &  (df_live_predictions['periodId'] != 14)]
+    df_live_predictions = df_live_predictions.merge(df_filtered[['match_handle_results', 'opta_match_id']], how='right', on='opta_match_id')
+    match_data = df_live_predictions[(df_live_predictions['match_handle_results'] == selected_match) &  (df_live_predictions['periodId'] != 14)]
     # st.dataframe(match_data)
     # Criar um gráfico de linhas simples com Plotly
     fig = px.line(
