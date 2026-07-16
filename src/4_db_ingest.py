@@ -237,6 +237,8 @@ final_snapshots_df.to_sql(
     index=False,  # Não salva o índice do Pandas como uma coluna no banco
 )
 
+final_snapshots_df.to_csv("../snapshots.csv", index=False)
+
 match_events_df.to_sql(
     name="match_events",  # Nome da tabela dentro do SQLite
     con=conn,  # A conexão que abrimos acima
@@ -244,12 +246,16 @@ match_events_df.to_sql(
     index=False,  # Não salva o índice do Pandas como uma coluna no banco
 )
 
+match_events_df.to_csv("../events.csv", index=False)
+
 match_live_predictions_df.to_sql(
     name="live_predictions",  # Nome da tabela dentro do SQLite
     con=conn,  # A conexão que abrimos acima
     if_exists="replace",  # 'append' adiciona os dados novos. 'replace' reconstrói a tabela do zero.
     index=False,  # Não salva o índice do Pandas como uma coluna no banco
 )
+
+match_live_predictions_df.to_csv("../live_predictions.csv", index=False)
 
 conn.close()
 # %%
