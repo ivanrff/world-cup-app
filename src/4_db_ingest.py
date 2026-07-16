@@ -148,13 +148,20 @@ match_live_predictions_df = match_live_predictions_df.pivot(
 ).reset_index()
 match_live_predictions_df.columns.name = None
 match_live_predictions_df[['Home', 'Away', 'Draw']] = match_live_predictions_df[['Home', 'Away', 'Draw']].apply(pd.to_numeric)
+match_live_predictions_df['time'] = match_live_predictions_df['timeMin'] + match_live_predictions_df['timeSec']/60
+match_live_predictions_df = match_live_predictions_df.drop(columns=['timeMin', 'timeSec'])
 
 # deixando as colunas lower case para consistencia
 snapshots_df.columns = [col.lower() for col in snapshots_df.columns]
 
 # colocando as coluans numéricas como números
-for col in ['home_proba', 'away_proba', 'draw_proba', 'home_score', 'away_score']:
-    snapshots_df[col] = pd.to_numeric(snapshots_df[col])
+snapshots_df = snapshots_df.astype({
+    "home_proba": float,
+    "away_proba": float,
+    "draw_proba": float,
+    "home_score": "Int64",  # Int64 (com I maiúsculo) aceita valores nulos (NaN) para jogos futuros
+    "away_score": "Int64",
+})
 
 # Convertendo as datas para horario de brasilia
 snapshots_df['match_datetime_br'] = to_br_timezone(snapshots_df["match_datetime"])
@@ -162,7 +169,17 @@ snapshots_df['final_whistle_br'] = to_br_timezone(snapshots_df["final_whistle"])
 snapshots_df = snapshots_df.drop(columns=['match_datetime', 'final_whistle'])
 
 # criando a coluna de handles. Ex.: 'BRA x FRA'
-snapshots_df['match_handle'] = snapshots_df['home_code'] + ' x ' + snapshots_df['away_code']
+snapshots_df['match_handle'] = snapshots_df['home_flag'] \
+                                + " " \
+                                + snapshots_df['home_code'] \
+                                + " " \
+                                + snapshots_df['home_score'].astype(str) \
+                                + ' x ' \
+                                + snapshots_df['away_score'].astype(str) \
+                                + " " \
+                                + snapshots_df['away_code'] \
+                                + " " \
+                                + snapshots_df['away_flag']
 
 # removendo as linhas TBD
 # snapshots_df = snapshots_df[snapshots_df['match_status'] != 'TBD'].copy()

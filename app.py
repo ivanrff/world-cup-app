@@ -16,15 +16,19 @@ st.set_page_config(layout="wide", page_title="Previsões do \"Supercomputador\" 
 def load_data():
     conn = sqlite3.connect("data/db/world_cup.db")
     df = pd.read_sql("SELECT * FROM opta_snapshots", conn)
+    df_events = pd.read_sql("SELECT * FROM match_events", conn)
+    df_live_predictions = pd.read_sql("SELECT * FROM live_predictions", conn).sort_values(by=['opta_match_id', 'periodId', 'time'])
     conn.close()
     
     # Garantir que a coluna de snapshot seja datetime
     df['snapshot_br'] = pd.to_datetime(df['snapshot_br'])
     df['final_whistle_br'] = pd.to_datetime(df['final_whistle_br'])
-    return df
+    df = df.sort_values(by='final_whistle_br')
 
-df = load_data().sort_values(by='final_whistle_br')
-df = df[(df['match_status'] != "TBD")].copy()
+    return df, df_events, df_live_predictions
+
+df, df_events, df_live_predictions = load_data()
+
 # df_future = df[(df['match_status'] != "TBD") & (df['match_status'] != "Played")]
 # df_past = df[df['match_status'] == "Played"]
 
@@ -79,8 +83,9 @@ df_filtered['data_extenso'] = (
 st.title("Previsões do \"Supercomputador\" Opta")
 
 # Exibir os dados em tabela (usando o data_editor para permitir ordenação)
-# st.subheader("Resultados futuros do snapshot")
-# st.dataframe(df_filtered[['snapshot_br', 'match_status', 'match_handle', 'final_whistle_br', 'prediction_time']].sort_values(by='final_whistle_br'))
+st.subheader("Resultados futuros do snapshot")
+# st.dataframe(df_filtered[['opta_match_id', 'match_handle']])
+# st.dataframe(df_live_predictions.head(df_live_predictions.shape[0]//2))
 
 # --- Exemplo de Gráfico: Evolução das Probabilidades ---
 # cores_map = {'Realizado': '#1f77b4', 'Futuro': '#ff7f0e'}
@@ -193,19 +198,20 @@ with col2:
         value=f"{df_filtered['model_grade'].mean():.2f}%"
     )
 
-# # --- Exemplo de Gráfico: Evolução das Probabilidades ---
-# st.subheader("Evolução das Previsões por Jogo")
-# match_ids = df_filtered['match_handle'].unique()
-# selected_match = st.selectbox("Escolha um jogo para ver a tendência:", match_ids)
+# --- Exemplo de Gráfico: Evolução das Probabilidades ---
+st.subheader("Evolução das Previsões por Jogo")
+match_ids = df_filtered['match_handle'].unique()
+selected_match = st.selectbox("Escolha um jogo para ver a tendência:", match_ids)
 
-# if selected_match:
-#     match_data = df_filtered[df_filtered['match_handle'] == selected_match]
-    
-#     # Criar um gráfico de linhas simples com Plotly
-#     fig = px.line(
-#         match_data, 
-#         x='snapshot_br', 
-#         y=['home_proba', 'away_proba', 'draw_proba'],
-#         title=f"Tendência de probabilidade - Jogo {selected_match}"
-#     )
-#     st.plotly_chart(fig, use_container_width=True)
+if selected_match:
+    df_live_predictions = df_live_predictions.merge(df_filtered[['match_handle', 'opta_match_id']], how='right', on='opta_match_id')
+    match_data = df_live_predictions[(df_live_predictions['match_handle'] == selected_match) &  (df_live_predictions['periodId'] != 14)]
+    # st.dataframe(match_data)
+    # Criar um gráfico de linhas simples com Plotly
+    fig = px.line(
+        match_data, 
+        x='time', 
+        y=['Home', 'Away', 'Draw'],
+        title=f"Tendência de probabilidade - Jogo {selected_match}"
+    )
+    st.plotly_chart(fig, use_container_width=True)
