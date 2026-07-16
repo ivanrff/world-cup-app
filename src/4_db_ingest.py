@@ -149,9 +149,12 @@ match_live_predictions_df = match_live_predictions_df.pivot(
     values="probability"
 ).reset_index()
 match_live_predictions_df.columns.name = None
-match_live_predictions_df[['Home', 'Away', 'Draw']] = match_live_predictions_df[['Home', 'Away', 'Draw']].apply(pd.to_numeric)
-match_live_predictions_df['time'] = match_live_predictions_df['timeMin'] + match_live_predictions_df['timeSec']/60
-match_live_predictions_df = match_live_predictions_df.drop(columns=['timeMin', 'timeSec'])
+match_live_predictions_df[['Home', 'Away', 'Draw']] = match_live_predictions_df[['Home', 'Away', 'Draw']].apply(pd.to_numeric) / 100
+
+# Conversão do tempo que está separado em duas colunas (minuto, segundo) em uma coluna só continua em (min)
+for df in [match_events_df, match_live_predictions_df]:
+    df['time'] = df['timeMin'] + df['timeSec']/60
+    df = df.drop(columns=['timeMin', 'timeSec'])
 
 # deixando as colunas lower case para consistencia
 snapshots_df.columns = [col.lower() for col in snapshots_df.columns]

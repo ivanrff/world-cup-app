@@ -10,6 +10,9 @@ import locale
 # Configuração da página para ficar larga e aproveitar melhor o espaço
 st.set_page_config(layout="wide", page_title="Previsões do \"Supercomputador\" Opta")
 
+def round_nearest_n(num, n=5):
+    return n * round(num / n)
+
 # Função com cache para ler o banco de dados
 # O @st.cache_data evita que o app leia o arquivo o tempo todo ao interagir com o site
 @st.cache_data
@@ -204,14 +207,212 @@ match_ids = df_filtered['match_handle_results'].unique()
 selected_match = st.selectbox("Escolha um jogo para ver a tendência:", match_ids)
 
 if selected_match:
-    df_live_predictions = df_live_predictions.merge(df_filtered[['match_handle_results', 'opta_match_id']], how='right', on='opta_match_id')
-    match_data = df_live_predictions[(df_live_predictions['match_handle_results'] == selected_match) &  (df_live_predictions['periodId'] != 14)]
-    # st.dataframe(match_data)
-    # Criar um gráfico de linhas simples com Plotly
-    fig = px.line(
-        match_data, 
-        x='time', 
-        y=['Home', 'Away', 'Draw'],
-        title=f"Tendência de probabilidade - Jogo {selected_match}"
+    # 1. Merge and initial filtering
+    df_live_predictions = df_live_predictions.merge(
+        df_filtered[['opta_match_id', 'match_handle_results', 'home_name_br', 'away_name_br']], 
+        how='right', 
+        on='opta_match_id'
     )
-    st.plotly_chart(fig, use_container_width=True)
+    df_events = df_events.merge(
+        df_filtered[['opta_match_id', 'match_handle_results', 'home_name_br', 'away_name_br']], 
+        how='right', 
+        on='opta_match_id'
+    )
+    
+    # Filter the selected match and sort chronologically by period and time
+    match_data = df_live_predictions[
+        (df_live_predictions['match_handle_results'] == selected_match) & 
+        (df_live_predictions['periodId'] != 14)
+    ].copy()
+    match_events = df_events[
+        (df_events['match_handle_results'] == selected_match)
+        & (df_events['qualifier_qualifierId'] == 56)
+        & (df_events['typeId'] == 16)
+    ].reset_index(drop=True).copy()
+    
+    match_data = match_data.sort_values(by=['periodId', 'time'])
+
+    if not match_data.empty:
+        # 2. Create the continuous timeline
+        timeline_x = []
+        hover_labels = []
+        tick_positions = []
+        tick_labels = []
+        
+        # Calculate the exact end time for each period to stack them continuously
+        p1_data = match_data[match_data['periodId'] == 1]
+        p1_end_time = p1_data['time'].max() if not p1_data.empty else 45
+        
+        p2_data = match_data[match_data['periodId'] == 2]
+        p2_max_real = p2_data['time'].max() if not p2_data.empty else 90
+        p2_end_time = p1_end_time + max(0, p2_max_real - 45)
+        
+        p3_data = match_data[match_data['periodId'] == 3]
+        p3_max_real = p3_data['time'].max() if not p3_data.empty else 105
+        p3_end_time = p2_end_time + max(0, p3_max_real - 90)
+
+        p4_data = match_data[match_data['periodId'] == 4]
+
+        # Map real times to create the X-axis marks beautifully
+        for index, row in match_data.iterrows():
+            period = row['periodId']
+            t_real = row['time']
+            t_real_int = int(round(t_real))
+            
+            if period == 1:
+                t_continuous = t_real
+                label_hover = f"{t_real_int}' (1T)"
+            elif period == 2:
+                time_into_period = max(0, t_real - 45)
+                t_continuous = p1_end_time + time_into_period
+                label_hover = f"{t_real_int}' (2T)"
+            elif period == 3:
+                time_into_period = max(0, t_real - 90)
+                t_continuous = p2_end_time + time_into_period
+                label_hover = f"{t_real_int}' (PROR1)"
+            elif period == 4:
+                time_into_period = max(0, t_real - 105)
+                t_continuous = p3_end_time + time_into_period
+                label_hover = f"{t_real_int}' (PROR2)"
+            else:
+                t_continuous = t_real
+                label_hover = f"{t_real_int}'"
+                
+            timeline_x.append(t_continuous)
+            hover_labels.append(label_hover)
+            
+            # Create nice ticks for the X-axis (every 10 minutes of real match time)
+            if t_real_int % 10 == 0:
+                # Avoid duplicate ticks for the same minute across periods
+                if f"{t_real_int}'" not in tick_labels:
+                    if (period == 1 and t_real <= 45) or \
+                       (period == 2 and 45 <= t_real <= 90) or \
+                       (period == 3 and 90 <= t_real <= 105) or \
+                       (period == 4 and 105 <= t_real <= 120):
+                        tick_positions.append(t_continuous)
+                        tick_labels.append(f"{t_real_int}'")
+
+        match_data['timeline_x'] = timeline_x
+        match_data['display_time'] = hover_labels
+
+        # Team names for the chart
+        home_name = match_data['home_name_br'].iloc[0] if 'home_name_br' in match_data.columns else 'Home'
+        away_name = match_data['away_name_br'].iloc[0] if 'away_name_br' in match_data.columns else 'Away'
+
+        rename_dict = {
+            'Home': home_name,
+            'Away': away_name,
+            'Draw': 'Empate'
+        }
+
+        match_data = match_data.rename(columns=rename_dict)
+        y_columns = [home_name, 'Empate', away_name]
+
+        # 3. Generate the single chart
+        fig = px.area(
+            match_data, 
+            x='display_time', 
+            y=y_columns, 
+            title="Distribuição de Probabilidade em Tempo Real",
+            custom_data=['display_time'],
+        )
+        
+        # Update the hover for each trace individually
+        for i, trace in enumerate(fig.data):
+            original_name = trace.name 
+            display_name = rename_dict.get(original_name, original_name)
+            
+            trace.name = display_name
+            invisible_x = "<span style='font-size: 1px; color: transparent;'>%{{x}}</span>"
+            
+            # Adiciona a informação do tempo (customdata) APENAS na primeira linha da legenda
+            if i == 0:
+                trace.hovertemplate = (
+                    f"<b>%{{customdata[0]}}</b><br>" # O título customizado
+                    f"<b>{display_name}:</b> %{{y:.1%}}<br>"
+                    f"{invisible_x}<extra></extra>"
+                )
+            else:
+                trace.hovertemplate = ("<br>"
+                    f"<b>{display_name}:</b> %{{y:.1%}}<br>"
+                    f"{invisible_x}<extra></extra>"
+                )
+            
+        fig.update_traces(hovertemplate="")
+        
+        # 4. Customize the X-axis to hide the artificial timeline
+        fig.update_layout(
+            xaxis=dict(
+                title="Tempo de Jogo",
+                tickmode='array',
+                tickvals=tick_positions,
+                ticktext=tick_labels,
+                gridcolor='rgba(200, 200, 200, 0.2)'
+            ),
+            yaxis=dict(
+                title="Probabilidade",
+                tickformat='.0%'
+            ),
+            legend_title="Resultado",
+            hovermode="x unified" 
+        )
+        
+        # Add dotted vertical lines dividing the periods
+        # Use Streamlit's native CSS variable to dynamically match the current theme background
+        dynamic_bg_color = bg = (
+            fig.layout.plot_bgcolor
+            or fig.layout.paper_bgcolor
+            or "#0E1117"
+        )
+        line_thickness = 2
+        
+        # Add dashed vertical lines dividing the periods
+        fig.add_vline(
+            x=p1_end_time, 
+            line_color=dynamic_bg_color, 
+            line_width=line_thickness
+        )
+        
+        if not p3_data.empty:
+            fig.add_vline(
+                x=p2_end_time,  
+                line_color=dynamic_bg_color,
+                line_width=line_thickness
+            )
+            
+        if not p4_data.empty:
+            fig.add_vline(
+                x=p3_end_time,  
+                line_color=dynamic_bg_color,
+                line_width=line_thickness
+            )
+        
+        for index, row in match_events.iterrows():
+            goal_time = f"{int(round(row['time']))}' ({row['periodId']}T)"
+            scorer_name = row['playerName']
+            # print(scorer_name)
+            # print(goal_time)
+            fig.add_vline(
+                x=goal_time, 
+                line_color="white", 
+                line_width=2,
+                # annotation_text="a",
+                # annotation_position="top"
+        )
+            # 2. Add the text explicitly controlling the coordinates
+            fig.add_annotation(
+                x=goal_time, 
+                y=1.00 + (index % 2)/30, # Position on the Y axis (1.02 pushes it slightly above the chart)
+                yref="paper", # "paper" means 0 is the bottom of the chart and 1 is the top
+                text=f"⚽{scorer_name} {int(round(row['time']))}'",
+                showarrow=False,
+                font=dict(color="white", size=12),
+                xanchor="center",
+                yanchor="bottom"
+            )
+
+        st.plotly_chart(fig, width='stretch', key="single_match_trend")
+    else:
+        st.info("Nenhum dado de período válido encontrado para este jogo.")
+
+# st.dataframe(match_events)
