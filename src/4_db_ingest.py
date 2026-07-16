@@ -65,6 +65,8 @@ for file in track(fixture_files, description="Processing files"):
             except:
                 if checker[f'{position}_name'] == 'Scotland':
                    checker[f'{position}_flag'] = "🏴󠁧󠁢󠁳󠁣󠁴󠁿"
+            if checker[f'{position}_name'] == 'England':
+                checker[f'{position}_flag'] = "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
 
         preMatchPredictions = match_data['liveData']['preMatchPredictions']
 
