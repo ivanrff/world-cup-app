@@ -20,7 +20,7 @@ live_predictions_dfs_list = []
 matches_list = []
 event_dfs_list = []
 played_matches_ids = set() # saves the ids of played matches that were already processed
-
+i = 0
 for file in track(fixture_files, description="Processing files"):
 
     snapshot = file.split('f')[0][1:][:-1]
@@ -36,6 +36,8 @@ for file in track(fixture_files, description="Processing files"):
         if not matchInfo:
             # checker['match_status'] = 'TBD'
             # matches.append(checker)
+            continue
+        if (match_data['liveData']['matchDetails']['matchStatus'] == 'Played') & (match_id in played_matches_ids):
             continue
 
         checker = {
@@ -79,7 +81,7 @@ for file in track(fixture_files, description="Processing files"):
         checker['match_status'] = match_results['matchStatus']
 
         if (checker['match_status'] == 'Played') & (match_id not in played_matches_ids):
-
+            i = i + 1
             for period in match_results['period']:
                 if period['id'] == len(match_results['period']):
                     checker['final_whistle'] = pd.to_datetime(period['end'])
@@ -136,7 +138,7 @@ for file in track(fixture_files, description="Processing files"):
 
 # SNAPSHOTS DATAFRAME
 snapshots_df = pd.DataFrame(matches_list)
-
+print(i)
 # EVENTS DATAFRAME
 match_events_df = pd.concat(event_dfs_list, ignore_index=True) if event_dfs_list else pd.DataFrame()
 
@@ -173,28 +175,6 @@ snapshots_df['match_datetime_br'] = to_br_timezone(snapshots_df["match_datetime"
 snapshots_df['final_whistle_br'] = to_br_timezone(snapshots_df["final_whistle"])
 snapshots_df = snapshots_df.drop(columns=['match_datetime', 'final_whistle'])
 
-# criando a coluna de handles. Ex.: 'BRA x FRA'
-snapshots_df['match_handle_results'] = snapshots_df['home_flag'] \
-                                + " " \
-                                + snapshots_df['home_code'] \
-                                + " " \
-                                + snapshots_df['home_score'].astype(str) \
-                                + ' x ' \
-                                + snapshots_df['away_score'].astype(str) \
-                                + " " \
-                                + snapshots_df['away_code'] \
-                                + " " \
-                                + snapshots_df['away_flag']
-
-
-snapshots_df['match_handle'] = snapshots_df['home_flag'] \
-                                + " " \
-                                + snapshots_df['home_code'] \
-                                + ' x ' \
-                                + snapshots_df['away_code'] \
-                                + " " \
-                                + snapshots_df['away_flag']
-
 # removendo as linhas TBD
 # snapshots_df = snapshots_df[snapshots_df['match_status'] != 'TBD'].copy()
 
@@ -207,9 +187,31 @@ snapshots_df['match_handle'] = snapshots_df['home_flag'] \
 # adicionando os resultados das partidas em todas linhas (até as no futuro do snapshot)
 played_df = snapshots_df[snapshots_df['match_status'] == 'Played'].copy()
 snapshots_df = snapshots_df.drop(columns=['home_score', 'away_score', 'result', 'final_whistle_br', 'home_outcome', 'draw_outcome', 'away_outcome'])
-played_subdf = played_df[['opta_match_id', 'match_handle', 'final_whistle_br', 'home_score', 'away_score', 'result', 'home_outcome', 'draw_outcome', 'away_outcome']]
+played_subdf = played_df[['opta_match_id', 'final_whistle_br', 'home_score', 'away_score', 'result', 'home_outcome', 'draw_outcome', 'away_outcome']]
+print(played_df.shape)
+final_snapshots_df = snapshots_df.merge(played_subdf, how='left', on=['opta_match_id'])
 
-final_snapshots_df = snapshots_df.merge(played_subdf, how='left', on=['opta_match_id', 'match_handle'])
+
+# criando a coluna de handles. Ex.: 'BRA x FRA'
+final_snapshots_df['match_handle'] = final_snapshots_df['home_flag'] \
+                                + " " \
+                                + final_snapshots_df['home_code'] \
+                                + ' x ' \
+                                + final_snapshots_df['away_code'] \
+                                + " " \
+                                + final_snapshots_df['away_flag']
+
+final_snapshots_df['match_handle_results'] = final_snapshots_df['home_flag'] \
+                                + " " \
+                                + final_snapshots_df['home_code'] \
+                                + " " \
+                                + final_snapshots_df['home_score'].astype(str) \
+                                + ' x ' \
+                                + final_snapshots_df['away_score'].astype(str) \
+                                + " " \
+                                + final_snapshots_df['away_code'] \
+                                + " " \
+                                + final_snapshots_df['away_flag']
 
 # calculando o desempenho do modelo
 final_snapshots_df['home_error'] = (final_snapshots_df['home_proba'] / 100 - final_snapshots_df['home_outcome']) ** 2
@@ -221,7 +223,7 @@ final_snapshots_df['model_grade'] = (1 - (final_snapshots_df['brier_score'] / 2)
 final_snapshots_df = final_snapshots_df.drop(columns=['home_outcome', 'draw_outcome', 'away_outcome', 'home_error', 'draw_error', 'away_error'])
 
 final_snapshots_df['prediction_time'] = final_snapshots_df.apply(
-    lambda row: 'future' if row['final_whistle_br'] > row['snapshot_br'] else 'past', 
+    lambda row: 'past' if row['final_whistle_br'] < row['snapshot_br'] else 'future', 
     axis=1
 )
 

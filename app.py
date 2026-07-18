@@ -13,9 +13,11 @@ st.set_page_config(layout="wide", page_title="Previsões do \"Supercomputador\" 
 def round_nearest_n(num, n=5):
     return n * round(num / n)
 
+line_sep = " --- "
+
 # Função com cache para ler o banco de dados
 # O @st.cache_data evita que o app leia o arquivo o tempo todo ao interagir com o site
-@st.cache_data
+# @st.cache_data
 def load_data():
     conn = sqlite3.connect("data/db/world_cup.db")
     df = pd.read_sql("SELECT * FROM opta_snapshots", conn)
@@ -32,8 +34,9 @@ def load_data():
 
 df, df_events, df_live_predictions = load_data()
 
-# df_future = df[(df['match_status'] != "TBD") & (df['match_status'] != "Played")]
-# df_past = df[df['match_status'] == "Played"]
+# -------------------------------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------------------------------
 
 # --- Sidebar para filtros ---
 st.sidebar.header("Filtros")
@@ -82,17 +85,55 @@ df_filtered['data_extenso'] = (
     df_filtered['final_whistle_br'].dt.strftime(', %H:%M')
 )
 
-# --- Layout Principal ---
-st.title("Previsões do \"Supercomputador\" Opta")
 
+# -------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------
+
+# --- Layout Principal ---
+
+svg = """
+<svg width="228" height="43" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 228 41.33"><defs><linearGradient id="a" x1="-190.63" y1="415.84" x2="-190.73" y2="415.94" gradientTransform="matrix(239.02 0 0 -239.02 45608.9 99438.71)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#6327c6"></stop><stop offset=".48" stop-color="#b225c3"></stop><stop offset="1" stop-color="#e62c4a"></stop></linearGradient></defs>
+<path fill="#fff" d="m136.37 8.79 9.51 24.05h-2.7l-2.7-7.02h-10.63l-2.77 7.02h-2.53l9.51-24.05h2.29Zm3.34 15.01-4.52-11.67-4.55 11.67h9.07Zm12.6-6.53c-.74.12-1.46.31-2.16.56l-.51.2v14.81h-2.29V16.68l1.28-.54c1.91-.76 4-1.15 6.27-1.15 4.47 0 6.71 2.2 6.71 6.61v11.23h-2.26V21.66c0-3.06-1.57-4.59-4.72-4.59-.81 0-1.59.06-2.33.19Zm20.37 5.67c.74.06 1.62.14 2.63.25v-1.55c0-1.46-.33-2.6-1-3.41-.66-.81-1.85-1.21-3.56-1.21-2.23 0-3.8.82-4.72 2.46l-.27.51-2.06-.84.34-.61c1.28-2.36 3.54-3.54 6.78-3.54 1.26 0 2.32.16 3.17.47.85.32 1.55.76 2.07 1.33.53.57.91 1.28 1.15 2.11.24.83.35 1.75.35 2.77v10.25l-1.21.51c-1.3.58-3.17.88-5.6.88-1.39 0-2.56-.1-3.49-.3-.93-.2-1.68-.52-2.24-.94-.56-.43-.96-.97-1.2-1.64-.24-.66-.35-1.44-.35-2.34 0-.94.13-1.75.4-2.41.27-.66.7-1.2 1.3-1.62.6-.42 1.36-.72 2.29-.91.93-.19 2.07-.29 3.42-.29.45 0 1.05.03 1.79.08Zm2.63 7.74v-5.63c-2.02-.2-3.58-.3-4.66-.3-1.78 0-3.03.26-3.76.78s-1.1 1.36-1.1 2.53c0 .56.07 1.06.22 1.48.15.43.4.78.78 1.06.37.28.86.49 1.47.62s1.38.2 2.33.2c1.73 0 3.09-.18 4.08-.54l.64-.2Zm4.75-22.8h2.26v24.96h-2.26V7.88Zm19.11 26.01c0 4.86-2.39 7.29-7.19 7.29-3.17 0-5.41-1.19-6.71-3.58l-.37-.71 2.02-1.01.3.57c.97 1.78 2.54 2.66 4.72 2.66 3.28 0 4.92-1.71 4.92-5.13v-1.99c-1.01.32-1.95.54-2.82.67-.87.13-1.69.2-2.48.2-4.45 0-6.68-2.19-6.68-6.58V15.5h2.26v10.69c0 3.08 1.57 4.62 4.72 4.62 1.44 0 3.1-.3 4.99-.91V15.5h2.29v18.38Zm14-5.64c0-.54-.1-.99-.29-1.35-.19-.36-.48-.65-.88-.88-.39-.22-.9-.4-1.52-.54-.62-.13-1.36-.25-2.21-.34-.85-.09-1.69-.2-2.5-.34-.81-.13-1.53-.38-2.18-.73-.64-.35-1.16-.84-1.55-1.47-.39-.63-.59-1.48-.59-2.56 0-1.57.56-2.81 1.69-3.71 1.12-.9 2.78-1.35 4.96-1.35 3.49 0 5.77 1.23 6.85 3.68h.03l.27.64-2.02.88-.24-.57h-.03c-.38-.85-.93-1.5-1.65-1.92-.72-.43-1.78-.64-3.17-.64-2.95 0-4.42.98-4.42 2.93 0 .74.17 1.33.51 1.77.34.44.84.75 1.52.93.25.07.48.12.69.17.21.05.43.08.66.12.22.03.48.06.76.08.28.02.6.06.96.1.81.09 1.61.21 2.39.35.79.15 1.49.4 2.11.76.62.36 1.12.84 1.5 1.45.38.61.57 1.42.57 2.43 0 1.62-.59 2.88-1.75 3.79-1.17.91-2.89 1.37-5.16 1.37-3.78 0-6.21-1.39-7.29-4.18-.02-.02-.03-.04-.03-.05s-.01-.03-.03-.05l-.17-.44 2.02-.88.27.67v.03c.74 1.93 2.46 2.9 5.16 2.9 3.17 0 4.76-1.02 4.76-3.07Zm9.88 4.64c-.81-.26-1.46-.67-1.96-1.23-.49-.56-.84-1.27-1.05-2.13-.2-.85-.3-1.89-.3-3.1v-8.84h-3.81V15.5h3.81v-4.05H222v4.05h5.5v2.09H222v8.77c0 .94.07 1.73.22 2.34.15.62.4 1.11.76 1.47.36.36.85.61 1.48.76.63.15 1.42.22 2.36.22h.61v2.16h-1.32c-1.24-.02-2.26-.16-3.07-.42ZM81.06 14.81c-2.74 0-5.01.35-6.81 1.05l-1.38.51v23.91h5.09v-7.22c1.01.2 1.9.3 2.66.3 2.58 0 4.53-.62 5.83-1.87 1.3-1.25 1.96-3.06 1.96-5.45v-4.25c0-2.25-.6-3.97-1.8-5.18-1.2-1.2-3.05-1.8-5.55-1.8Zm2.23 11.23c0 1.84-1.02 2.76-3.07 2.76-.65 0-1.41-.07-2.26-.2v-8.97l.2-.03c.38-.09.76-.15 1.15-.19.38-.03.76-.05 1.15-.05 1.89 0 2.83.82 2.83 2.46v4.21Zm16.47-6.21 1.5-4.52h-4.22v-4.05h-5.09v4.05h-3.03v4.52h3.03v5.87c0 1.53.16 2.78.47 3.76.31.98.8 1.75 1.45 2.33.65.57 1.5.97 2.55 1.2s2.29.34 3.73.34h.8v-4.69h-.8c-.58 0-1.07-.04-1.47-.13-.39-.09-.71-.25-.96-.49s-.42-.56-.52-.96c-.1-.4-.15-.92-.15-1.55v-5.66h2.72Zm10.08-5.02c-3.55 0-5.96 1.17-7.22 3.51l-.51.98 4.21 1.75.54-.71c.63-.83 1.56-1.25 2.8-1.25 1.73 0 2.6.83 2.6 2.49v.74c-.36-.02-.74-.04-1.13-.05-.39-.01-.82-.02-1.26-.02-1.42 0-2.62.1-3.62.29-1 .19-1.81.5-2.43.93-.62.43-1.07.99-1.37 1.7-.29.71-.44 1.58-.44 2.61 0 .94.13 1.77.39 2.48s.69 1.29 1.28 1.74c.6.45 1.39.79 2.38 1.01.99.22 2.21.34 3.68.34 2.9 0 5.02-.3 6.37-.91.04-.02.13-.06.25-.12s.26-.12.42-.19c.18-.09.37-.18.57-.27v-9.95c0-4.74-2.51-7.11-7.52-7.11Zm2.43 14.43-.3.03c-.29.05-.65.08-1.08.1-.43.02-.93.03-1.52.03-.88 0-1.47-.14-1.79-.42-.32-.28-.47-.69-.47-1.23s.16-.92.49-1.2c.33-.28.94-.42 1.84-.42.13 0 .34 0 .62.02.28.01.57.02.88.02s.58 0 .84.02c.26.01.42.02.49.02v3.03ZM68.71 10.8c-1.73-1.59-4.19-2.39-7.37-2.39s-5.61.8-7.34 2.39c-1.73 1.59-2.59 3.81-2.59 6.66v6.8c0 2.85.86 5.07 2.59 6.66 1.73 1.59 4.17 2.39 7.34 2.39s5.64-.8 7.37-2.39c1.73-1.59 2.59-3.81 2.59-6.66v-6.8c0-2.85-.86-5.07-2.59-6.66Zm-2.89 13.56c0 2.63-1.49 3.94-4.48 3.94-1.44 0-2.54-.33-3.3-.99-.76-.66-1.14-1.64-1.14-2.95v-7c0-1.3.38-2.28 1.14-2.95.76-.66 1.86-.99 3.3-.99 2.98 0 4.48 1.31 4.48 3.94v7Z"></path>
+<path d="M40.25 0c.59 0 1.08.48 1.08 1.08v9.95c0 .59-.48 1.08-1.08 1.08h-9.57c-.59 0-1.42.34-1.84.76l-1.28 1.28c-.42.42-.76 1.24-.76 1.84v7.15c0 .59-.48 1.08-1.08 1.08h-7.15c-.59 0-1.42.34-1.84.76l-1.28 1.28c-.42.42-.76 1.24-.76 1.84v4.73c0 .59-.48 1.08-1.08 1.08H8.88c-.59 0-1.42.34-1.84.76l-1.28 1.28c-.42.42-.76 1.24-.76 1.84v2.31c0 .59-.48 1.08-1.08 1.08H1.24c-.59 0-1.08-.48-1.08-1.08h.01v-2.69c0-.59.48-1.08 1.08-1.08h2.3c.59 0 1.42-.34 1.84-.76l1.28-1.28c.42-.42.76-1.24.76-1.84v-4.73c0-.59.48-1.08 1.08-1.08h4.73c.59 0 1.42-.34 1.84-.76l1.28-1.28c.42-.42.76-1.24.76-1.84v-7.15c0-.59.48-1.08 1.08-1.08h7.15c.59 0 1.42-.34 1.84-.76l1.28-1.28c.42-.42.76-1.24.76-1.84V1.08c0-.59.48-1.08 1.08-1.08h9.95Zm0 14.51c.59 0 1.08.48 1.08 1.08v7.54c0 .59-.48 1.08-1.08 1.08h-7.16c-.59 0-1.42.34-1.84.76l-1.28 1.28c-.42.42-.76 1.24-.76 1.84v4.73c0 .59-.48 1.08-1.08 1.08H23.4c-.59 0-1.42.34-1.84.76l-1.28 1.28c-.42.42-.76 1.24-.76 1.84v2.31c0 .59-.48 1.08-1.08 1.08h-2.69c-.59 0-1.08-.48-1.08-1.08V37.4c0-.59.48-1.08 1.08-1.08h2.31c.59 0 1.42-.34 1.84-.76l1.28-1.28c.42-.42.76-1.24.76-1.84v-4.73c0-.59.48-1.08 1.08-1.08h4.73c.59 0 1.42-.34 1.84-.76l1.28-1.28c.42-.42.76-1.24.76-1.84v-7.16c0-.59.48-1.08 1.08-1.08h7.54Zm0 12.14c.59 0 1.07.48 1.07 1.07v5.1c0 .59-.48 1.07-1.07 1.07h-4.72c-.59 0-1.41.34-1.83.76l-1.28 1.28c-.42.42-.76 1.24-.76 1.83v2.31c0 .59-.48 1.07-1.07 1.07H27.9c-.59 0-1.07-.48-1.07-1.07v-2.69c0-.59.48-1.07 1.07-1.07h2.31c.59 0 1.41-.34 1.83-.76l1.28-1.28c.42-.42.76-1.24.76-1.83v-4.72c0-.59.48-1.07 1.07-1.07h5.1Zm-.01 9.61c.6 0 1.09.47 1.09 1.05v2.62c0 .58-.49 1.05-1.09 1.05h-2.72c-.6 0-1.09-.47-1.09-1.05v-2.62c0-.58.49-1.05 1.09-1.05h2.72Z" fill="url(#a)"></path>
+</svg>
+"""
+
+st.iframe(svg, height=50)
+st.title("Previsões da Copa do Mundo FIFA")
+
+# -------------------------------------------------------------------------------------------------------
+st.markdown(line_sep)
+# -------------------------------------------------------------------------------------------------------
+
+# st.dataframe(df_future)
+# # for index, row in df_future[['match_handle', 'match_datetime_br']].drop_duplicates().iterrows():
+# #     st.metric("", f"{row['match_handle']}, {row['match_datetime_br']}")
+# st.dataframe(df_past)
+# -------------------------------------------------------------------------------------------------------
+# st.markdown(line_sep)
+# -------------------------------------------------------------------------------------------------------
+
+
+# with st.container(border=True):
+#     st.markdown("### Próximas Partidas")
+#     # st.write("Este retângulo agrupa várias informações de forma organizada.")
+    
+#     # Adding metrics inside the container
+#     total_sales = 15400
+#     st.metric(label="Faturamento Total", value=f"${total_sales:,}")
+    
+#     # Adding a button inside the container
+#     if st.button("Ver Detalhes", key="details_btn"):
+#         st.info("Botão clicado dentro do container!")
 # Exibir os dados em tabela (usando o data_editor para permitir ordenação)
-st.subheader("Resultados futuros do snapshot")
+# st.subheader("Resultados futuros do snapshot")
 # st.dataframe(df_filtered[['opta_match_id', 'match_handle_results']])
 # st.dataframe(df_live_predictions.head(df_live_predictions.shape[0]//2))
 
 # --- Exemplo de Gráfico: Evolução das Probabilidades ---
 # cores_map = {'Realizado': '#1f77b4', 'Futuro': '#ff7f0e'}
 # Criar um gráfico de linhas simples com Plotly
+st.subheader("Desempenho do Modelo em cada Partida")
 fig = px.line(
     df_filtered, 
     x='final_whistle_br', 
@@ -100,7 +141,7 @@ fig = px.line(
     color='prediction_time',
     # color_discrete_map=cores_map,
     markers=True,
-    title="Desempenho do modelo",
+    # title="Desempenho do modelo",
     custom_data=[
                 'home_name_br', # 0
                 'away_name_br', # 1
@@ -116,6 +157,12 @@ fig = px.line(
                 'away_flag'
             ]
 )
+df_filtered['cum_mean'] = df_filtered['model_grade'].expanding().mean()
+# fig.add_scatter(
+#     x=df_filtered['final_whistle_br'], 
+#     y=df_filtered['cum_mean'],
+#     mode='lines'
+# )
 
 # https://api.fifa.com/api/v3/picture/flags-sq-2/{}
 
@@ -163,58 +210,25 @@ fig.update_yaxes(range=[0, 100])
 
 st.plotly_chart(fig, width='stretch')
 
-## -- AVG SCORES -- 
-
-# Injeta o CSS para centralizar o rótulo (label) e o valor (value) do st.metric
-st.html(
-    """
-    <style>
-        /* Mira no bloco completo da métrica e centraliza todos os filhos flex */
-        [data-testid="stMetric"] {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        
-        /* Garante que o texto do label também obedeça ao centro */
-        [data-testid="stMetricLabel"] {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-    </style>
-    """
-)
-
-col1, col2 = st.columns(2)
-
-with col1:
-    st.metric(
-        label="Brier Score Médio", 
-        value=f"{df_filtered['brier_score'].mean():.4f}"
-    )
-
-with col2:
-    st.metric(
-        label="Desempenho Médio", 
-        value=f"{df_filtered['model_grade'].mean():.2f}%"
-    )
+# -------------------------------------------------------------------------------------------------------
+st.markdown(line_sep)
+# -------------------------------------------------------------------------------------------------------
 
 # --- Exemplo de Gráfico: Evolução das Probabilidades ---
 st.subheader("Evolução das Previsões por Jogo")
-match_ids = df_filtered['match_handle_results'].unique()
-selected_match = st.selectbox("Escolha um jogo para ver a tendência:", match_ids)
+df_filtered_played = df_filtered[df_filtered['match_status'] == "Played"]
+match_ids = df_filtered_played['match_handle_results'].unique()
+selected_match = st.selectbox("Escolha um jogo para ver a tendência:", match_ids, index=len(match_ids)-1)
 
 if selected_match:
     # 1. Merge and initial filtering
     df_live_predictions = df_live_predictions.merge(
-        df_filtered[['opta_match_id', 'match_handle_results', 'home_name_br', 'away_name_br']], 
+        df_filtered_played[['opta_match_id', 'match_handle_results', 'home_name_br', 'away_name_br']], 
         how='right', 
         on='opta_match_id'
     )
     df_events = df_events.merge(
-        df_filtered[['opta_match_id', 'match_handle_results', 'home_name_br', 'away_name_br']], 
+        df_filtered_played[['opta_match_id', 'match_handle_results', 'home_name_br', 'away_name_br']], 
         how='right', 
         on='opta_match_id'
     )
@@ -323,19 +337,18 @@ if selected_match:
             display_name = rename_dict.get(original_name, original_name)
             
             trace.name = display_name
-            invisible_x = "<span style='font-size: 1px; color: transparent;'>%{{x}}</span>"
             
             # Adiciona a informação do tempo (customdata) APENAS na primeira linha da legenda
             if i == 0:
                 trace.hovertemplate = (
                     f"<b>%{{customdata[0]}}</b><br>" # O título customizado
                     f"<b>{display_name}:</b> %{{y:.1%}}<br>"
-                    f"{invisible_x}<extra></extra>"
+                    f"<extra></extra>"
                 )
             else:
                 trace.hovertemplate = ("<br>"
                     f"<b>{display_name}:</b> %{{y:.1%}}<br>"
-                    f"{invisible_x}<extra></extra>"
+                    f"<extra></extra>"
                 )
             
         fig.update_traces(hovertemplate="")
@@ -359,33 +372,33 @@ if selected_match:
         
         # Add dotted vertical lines dividing the periods
         # Use Streamlit's native CSS variable to dynamically match the current theme background
-        dynamic_bg_color = bg = (
-            fig.layout.plot_bgcolor
-            or fig.layout.paper_bgcolor
-            or "#0E1117"
-        )
-        line_thickness = 2
+        # dynamic_bg_color = bg = (
+        #     fig.layout.plot_bgcolor
+        #     or fig.layout.paper_bgcolor
+        #     or "#0E1117"
+        # )
+        # line_thickness = 2
         
-        # Add dashed vertical lines dividing the periods
-        fig.add_vline(
-            x=p1_end_time, 
-            line_color=dynamic_bg_color, 
-            line_width=line_thickness
-        )
+        # # Add dashed vertical lines dividing the periods
+        # fig.add_vline(
+        #     x=p1_end_time, 
+        #     line_color=dynamic_bg_color, 
+        #     line_width=line_thickness
+        # )
         
-        if not p3_data.empty:
-            fig.add_vline(
-                x=p2_end_time,  
-                line_color=dynamic_bg_color,
-                line_width=line_thickness
-            )
+        # if not p3_data.empty:
+        #     fig.add_vline(
+        #         x=p2_end_time,  
+        #         line_color=dynamic_bg_color,
+        #         line_width=line_thickness
+        #     )
             
-        if not p4_data.empty:
-            fig.add_vline(
-                x=p3_end_time,  
-                line_color=dynamic_bg_color,
-                line_width=line_thickness
-            )
+        # if not p4_data.empty:
+        #     fig.add_vline(
+        #         x=p3_end_time,  
+        #         line_color=dynamic_bg_color,
+        #         line_width=line_thickness
+        #     )
         
         for index, row in match_events.iterrows():
             goal_time = f"{int(round(row['time']))}' ({row['periodId']}T)"
@@ -415,4 +428,4 @@ if selected_match:
     else:
         st.info("Nenhum dado de período válido encontrado para este jogo.")
 
-# st.dataframe(match_events)
+st.dataframe(match_events)
