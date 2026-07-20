@@ -245,6 +245,7 @@ if len(next_matches) != 0:
     # -------------------------------------------------------------------------------------------------------
 
 st.subheader("Desempenho do Modelo em cada Partida")
+df_filtered['cum_mean'] = df_filtered['model_grade'].expanding().mean()
 fig = px.line(
     df_filtered, 
     x='final_whistle_br', 
@@ -265,10 +266,10 @@ fig = px.line(
                 'data_extenso', # 8
                 'brier_score', # 9
                 'home_flag',
-                'away_flag'
+                'away_flag',
+                'cum_mean'
             ]
 )
-df_filtered['cum_mean'] = df_filtered['model_grade'].expanding().mean()
 # fig.add_scatter(
 #     x=df_filtered['final_whistle_br'], 
 #     y=df_filtered['cum_mean'],
@@ -289,6 +290,8 @@ fig.update_traces(
                 "<b>Data do Fim:</b> %{customdata[8]}<br>" +
                 "<b>Brier Score:</b> %{customdata[9]:.4f}<br>" +
                 "<b>Desempenho da Opta:</b> %{y:.2f}%<br>" +
+                "-<br>" +
+                "<b>Desempenho Médio:</b> %{customdata[12]:.2f}%" +
                 "<extra></extra>" # Esse <extra> vazio serve para sumir com a caixa lateral com o nome da coluna
 )
 
@@ -316,7 +319,7 @@ fig.update_layout(
     showlegend=False,
     hoverlabel=dict(
         bgcolor="rgba(0, 0, 0, 0.5)",  # 60% opacity white background
-        # font_color="black"
+        font_size=14
     )
 )
 
