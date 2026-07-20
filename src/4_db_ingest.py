@@ -151,7 +151,7 @@ match_live_predictions_df = match_live_predictions_df.pivot(
     values="probability"
 ).reset_index()
 match_live_predictions_df.columns.name = None
-match_live_predictions_df[['Home', 'Away', 'Draw']] = match_live_predictions_df[['Home', 'Away', 'Draw']].apply(pd.to_numeric) / 100
+match_live_predictions_df[['Home', 'Away', 'Draw']] = match_live_predictions_df[['Home', 'Away', 'Draw']].apply(pd.to_numeric)
 
 # Conversão do tempo que está separado em duas colunas (minuto, segundo) em uma coluna só continua em (min)
 for df in [match_events_df, match_live_predictions_df]:
@@ -188,7 +188,7 @@ snapshots_df = snapshots_df.drop(columns=['match_datetime', 'final_whistle'])
 played_df = snapshots_df[snapshots_df['match_status'] == 'Played'].copy()
 snapshots_df = snapshots_df.drop(columns=['home_score', 'away_score', 'result', 'final_whistle_br', 'home_outcome', 'draw_outcome', 'away_outcome'])
 played_subdf = played_df[['opta_match_id', 'final_whistle_br', 'home_score', 'away_score', 'result', 'home_outcome', 'draw_outcome', 'away_outcome']]
-print(played_df.shape)
+# print(played_df.shape)
 final_snapshots_df = snapshots_df.merge(played_subdf, how='left', on=['opta_match_id'])
 
 
@@ -226,6 +226,17 @@ final_snapshots_df['prediction_time'] = final_snapshots_df.apply(
     lambda row: 'past' if row['final_whistle_br'] < row['snapshot_br'] else 'future', 
     axis=1
 )
+
+# ---- calculando o desempenho minuto-a-minuto
+outcome_subdf = played_df[['opta_match_id', 'home_outcome', 'draw_outcome', 'away_outcome']]
+match_live_predictions_df = match_live_predictions_df.merge(outcome_subdf, how='right', on=['opta_match_id'])
+match_live_predictions_df['home_error'] = (match_live_predictions_df['Home'] / 100 - match_live_predictions_df['home_outcome']) ** 2
+match_live_predictions_df['draw_error'] = (match_live_predictions_df['Draw'] / 100 - match_live_predictions_df['draw_outcome']) ** 2
+match_live_predictions_df['away_error'] = (match_live_predictions_df['Away'] / 100 - match_live_predictions_df['away_outcome']) ** 2
+
+match_live_predictions_df['brier_score'] = match_live_predictions_df['home_error'] + match_live_predictions_df['draw_error'] + match_live_predictions_df['away_error']
+match_live_predictions_df['model_grade'] = (1 - (match_live_predictions_df['brier_score'] / 2)) * 100
+match_live_predictions_df = match_live_predictions_df.drop(columns=['home_outcome', 'draw_outcome', 'away_outcome', 'home_error', 'draw_error', 'away_error'])
 
 # salvando para visualizar em csv
 final_snapshots_df.sort_values(by=['match_datetime_br', 'final_whistle_br', 'snapshot_br']).to_csv("../test.csv", index=False)

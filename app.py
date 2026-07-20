@@ -28,11 +28,15 @@ def load_data():
     # Garantir que a coluna de snapshot seja datetime
     df['snapshot_br'] = pd.to_datetime(df['snapshot_br'])
     df['final_whistle_br'] = pd.to_datetime(df['final_whistle_br'])
+    df['match_datetime_br'] = pd.to_datetime(df['match_datetime_br'])
     df = df.sort_values(by='final_whistle_br')
 
     return df, df_events, df_live_predictions
 
 df, df_events, df_live_predictions = load_data()
+
+# st.dataframe(df_live_predictions)
+# st.dataframe(df)
 
 # -------------------------------------------------------------------------------------------------------
 
@@ -100,39 +104,146 @@ svg = """
 
 st.iframe(svg, height=50)
 st.title("Previsões da Copa do Mundo FIFA")
-
 # -------------------------------------------------------------------------------------------------------
 st.markdown(line_sep)
 # -------------------------------------------------------------------------------------------------------
 
 # st.dataframe(df_future)
-# # for index, row in df_future[['match_handle', 'match_datetime_br']].drop_duplicates().iterrows():
-# #     st.metric("", f"{row['match_handle']}, {row['match_datetime_br']}")
 # st.dataframe(df_past)
 # -------------------------------------------------------------------------------------------------------
 # st.markdown(line_sep)
 # -------------------------------------------------------------------------------------------------------
 
+# st.title("Próximas Partidas")
 
-# with st.container(border=True):
-#     st.markdown("### Próximas Partidas")
-#     # st.write("Este retângulo agrupa várias informações de forma organizada.")
-    
-#     # Adding metrics inside the container
-#     total_sales = 15400
-#     st.metric(label="Faturamento Total", value=f"${total_sales:,}")
-    
-#     # Adding a button inside the container
-#     if st.button("Ver Detalhes", key="details_btn"):
-#         st.info("Botão clicado dentro do container!")
-# Exibir os dados em tabela (usando o data_editor para permitir ordenação)
-# st.subheader("Resultados futuros do snapshot")
-# st.dataframe(df_filtered[['opta_match_id', 'match_handle_results']])
-# st.dataframe(df_live_predictions.head(df_live_predictions.shape[0]//2))
+next_matches = []
+for index, row in df_future.iterrows():
+    next_matches.append(row.to_dict())
 
-# --- Exemplo de Gráfico: Evolução das Probabilidades ---
-# cores_map = {'Realizado': '#1f77b4', 'Futuro': '#ff7f0e'}
-# Criar um gráfico de linhas simples com Plotly
+if len(next_matches) != 0:
+    # print(next_matches)
+    # 2. Injetamos o CSS para criar a "esteira rolável" horizontal
+    st.html(
+        """
+        <style>
+            /* Configura o container pai para renderizar os filhos lado a lado e permitir rolagem */
+            [data-testid="stHorizontalBlock"] {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                padding-bottom: 15px; /* Espaço para a barra de rolagem não cortar o conteúdo */
+                gap: 16px;
+            }
+            
+            /* Define uma largura fixa para cada retângulo de partida não espremer */
+            [data-testid="stHorizontalBlock"] > div {
+                min-width: 220px !important;
+                max-width: 220px !important;
+                flex-shrink: 0 !important;
+            }
+            
+            /* Customização opcional da barra de rolagem para ficar mais sutil */
+            [data-testid="stHorizontalBlock"]::-webkit-scrollbar {
+                height: 8px;
+            }
+            [data-testid="stHorizontalBlock"]::-webkit-scrollbar-thumb {
+                background: #b225c3; 
+                border-radius: 4px;
+            }
+            [data-testid="stHorizontalBlock"]::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            /* Reduz o espaçamento lateral interno das sub-colunas dentro dos cards */
+            [data-testid="stColumn"] {
+                padding-left: 2px !important;
+                padding-right: 2px !important;
+            }
+            
+            /* Remove o padding excessivo dentro das divs de markdown */
+            div[data-testid="stMarkdownContainer"] > p {
+                margin-bottom: 0px !important;
+            }
+        </style>
+        """
+    )
+
+    # 3. Criamos as colunas dinamicamente baseado no número de partidas
+    # Passamos uma lista de 1s com o tamanho das partidas para criar colunas iguais
+    colunas = st.columns([1] * len(next_matches))
+
+    for i, next_match in enumerate(next_matches):
+        with colunas[i]:
+            with st.container(border=True):
+                # 1. Data/Hora no topo usando componente nativo
+                st.caption(f"{next_match['match_datetime_br'].strftime("%d/%m, %H:%M")}")
+                
+                # 2. String HTML limpa
+                card_layout = f"""
+                <div style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-family: "Source Sans", sans-serif;">
+                    
+                    <!-- Linha Time da Casa -->
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-weight: bold; width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            {next_match['home_flag']} {next_match['home_name_br']}
+                        </span>
+                        <span style="font-weight: 600;">
+                            {next_match['home_proba']:.1f}%
+                        </span>
+                    </div>
+                    
+                    <!-- Linha Time Visitante -->
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-weight: bold; width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            {next_match['away_flag']} {next_match['away_name_br']}
+                        </span>
+                        <span style="font-weight: 600;">
+                            {next_match['away_proba']:.1f}%
+                        </span>
+                    </div>
+
+                    <!-- Linha Empate -->
+                    <div style="display: flex; align-items: center; gap: 15px; margin-top: 4px;">
+                        <span style="color: #888; width: 140px;">
+                            Empate
+                        </span>
+                        <span style="color: #888;">
+                            {next_match['draw_proba']:.1f}%
+                        </span>
+                    </div>
+
+                </div>
+                """
+                
+                # 3. Renderizando via st.html() para garantir a execução do HTML
+                st.html(card_layout)
+
+        # Você ainda pode continuar escrevendo abaixo das colunas, 
+        # mas ainda dentro do retângulo se quiser:
+        # st.caption("Última atualização: agora mesmo")
+    # with st.container(border=True):
+    #     st.markdown("### Próximas Partidas")
+    #     # st.write("Este retângulo agrupa várias informações de forma organizada.")
+        
+    #     # Adding metrics inside the container
+    #     total_sales = 15400
+    #     st.metric(label="Faturamento Total", value=f"${total_sales:,}")
+        
+    #     # Adding a button inside the container
+    #     if st.button("Ver Detalhes", key="details_btn"):
+    #         st.info("Botão clicado dentro do container!")
+    # Exibir os dados em tabela (usando o data_editor para permitir ordenação)
+    # st.subheader("Resultados futuros do snapshot")
+    # st.dataframe(df_filtered[['opta_match_id', 'match_handle_results']])
+    # st.dataframe(df_live_predictions.head(df_live_predictions.shape[0]//2))
+
+    # --- Exemplo de Gráfico: Evolução das Probabilidades ---
+    # cores_map = {'Realizado': '#1f77b4', 'Futuro': '#ff7f0e'}
+    # Criar um gráfico de linhas simples com Plotly
+
+    # -------------------------------------------------------------------------------------------------------
+    st.markdown(line_sep)
+    # -------------------------------------------------------------------------------------------------------
+
 st.subheader("Desempenho do Modelo em cada Partida")
 fig = px.line(
     df_filtered, 
@@ -170,9 +281,9 @@ fig.update_traces(
     hovertemplate="<b>%{customdata[10]} %{customdata[0]} x %{customdata[11]} %{customdata[1]}</b><br>" +
                 "<b>%{customdata[2]}</b><br>" +
                 "-<br>" +
-                "<b>%{customdata[0]} Vence:</b> %{customdata[3]}%<br>" +
-                "<b>%{customdata[1]} Vence:</b> %{customdata[4]}%<br>" +
-                "<b>Empate:</b> %{customdata[5]}%<br>" +
+                "<b>%{customdata[0]} Vence:</b> %{customdata[3]:.0f}%<br>" +
+                "<b>%{customdata[1]} Vence:</b> %{customdata[4]:.0f}%<br>" +
+                "<b>Empate:</b> %{customdata[5]:.0f}%<br>" +
                 "-<br>" +
                 "<b>Resultado Final:</b> %{customdata[10]} %{customdata[6]}-%{customdata[7]} %{customdata[11]}<br>" +
                 "<b>Data do Fim:</b> %{customdata[8]}<br>" +
@@ -197,15 +308,19 @@ fig.add_vrect(
     annotation_font=dict(size=14, color="#1f77b4")
 )
 
-fig.add_vline(x=latest_snapshot, line_color="red")
+# fig.add_vline(x=latest_snapshot, line_color="red")
 
 fig.update_layout(
     xaxis_title="",
     yaxis_title="Desempenho (0 a 100%)",
-    showlegend=False
+    showlegend=False,
+    hoverlabel=dict(
+        bgcolor="rgba(0, 0, 0, 0.5)",  # 60% opacity white background
+        # font_color="black"
+    )
 )
 
-fig.update_xaxes(range=["2026-06-11", (datetime.now() + timedelta(days=1)).strftime(format="%Y-%m-%d")], tickformat="%d/%m")
+fig.update_xaxes(range=["2026-06-11", "2026-07-20"], tickformat="%d/%m")
 fig.update_yaxes(range=[0, 100])
 
 st.plotly_chart(fig, width='stretch')
@@ -215,10 +330,10 @@ st.markdown(line_sep)
 # -------------------------------------------------------------------------------------------------------
 
 # --- Exemplo de Gráfico: Evolução das Probabilidades ---
-st.subheader("Evolução das Previsões por Jogo")
+st.subheader("Dados Minuto-a-Minuto")
 df_filtered_played = df_filtered[df_filtered['match_status'] == "Played"]
 match_ids = df_filtered_played['match_handle_results'].unique()
-selected_match = st.selectbox("Escolha um jogo para ver a tendência:", match_ids, index=len(match_ids)-1)
+selected_match = st.selectbox("Selecione uma partida:", match_ids, index=len(match_ids)-1)
 
 if selected_match:
     # 1. Merge and initial filtering
@@ -240,9 +355,11 @@ if selected_match:
     ].copy()
     match_events = df_events[
         (df_events['match_handle_results'] == selected_match)
-        & (df_events['qualifier_qualifierId'] == 56)
-        & (df_events['typeId'] == 16)
-    ].reset_index(drop=True).copy()
+    ]
+    match_confirmed_goals = match_events[
+        (match_events['qualifier_qualifierId'] == 56)
+        & (match_events['typeId'] == 16)
+    ]
     
     match_data = match_data.sort_values(by=['periodId', 'time'])
 
@@ -320,112 +437,366 @@ if selected_match:
         }
 
         match_data = match_data.rename(columns=rename_dict)
-        y_columns = [home_name, 'Empate', away_name]
+        y_columns = [
+            home_name,
+            'Empate',
+            away_name
+        ]
 
+        # ---------------------------------------
+        cols_not_needed = [
+            "periodId",
+            "timeMin",
+            "timeSec",
+            "opta_match_id",
+            "time",
+            "match_handle_results",
+            "home_name_br",
+            "away_name_br"
+            ]
+        match_data_to_plot = match_data.drop(columns=cols_not_needed)
+        match_data_to_plot = match_data_to_plot.groupby("display_time").mean().reset_index().sort_values(by="timeline_x")
+        # match_data = match_data.groupby([])
+        # ---------------------------------------
         # 3. Generate the single chart
-        fig = px.area(
-            match_data, 
+        fig_1 = px.area(
+            match_data_to_plot, 
             x='display_time', 
             y=y_columns, 
-            title="Distribuição de Probabilidade em Tempo Real",
-            custom_data=['display_time'],
-        )
-        
-        # Update the hover for each trace individually
-        for i, trace in enumerate(fig.data):
-            original_name = trace.name 
-            display_name = rename_dict.get(original_name, original_name)
+            title="Distribuição de Probabilidade em Tempo Real"
+        )          
             
-            trace.name = display_name
-            
-            # Adiciona a informação do tempo (customdata) APENAS na primeira linha da legenda
-            if i == 0:
-                trace.hovertemplate = (
-                    f"<b>%{{customdata[0]}}</b><br>" # O título customizado
-                    f"<b>{display_name}:</b> %{{y:.1%}}<br>"
-                    f"<extra></extra>"
-                )
-            else:
-                trace.hovertemplate = ("<br>"
-                    f"<b>{display_name}:</b> %{{y:.1%}}<br>"
-                    f"<extra></extra>"
-                )
-            
-        fig.update_traces(hovertemplate="")
+        fig_1.update_traces(hovertemplate="")
         
         # 4. Customize the X-axis to hide the artificial timeline
-        fig.update_layout(
+        fig_1.update_layout(
             xaxis=dict(
                 title="Tempo de Jogo",
-                tickmode='array',
                 tickvals=tick_positions,
-                ticktext=tick_labels,
-                gridcolor='rgba(200, 200, 200, 0.2)'
+                ticktext=tick_labels
             ),
             yaxis=dict(
                 title="Probabilidade",
-                tickformat='.0%'
+                tickformat=".0f",
+                ticksuffix='%'
             ),
-            legend_title="Resultado",
+            legend=dict(
+                title="Resultado",
+                traceorder="reversed" # <--- INVERTE A ORDEM DA LEGENDA
+            ),
             hovermode="x unified" 
         )
         
         # Add dotted vertical lines dividing the periods
         # Use Streamlit's native CSS variable to dynamically match the current theme background
-        # dynamic_bg_color = bg = (
-        #     fig.layout.plot_bgcolor
-        #     or fig.layout.paper_bgcolor
-        #     or "#0E1117"
-        # )
-        # line_thickness = 2
+        dynamic_bg_color = bg = (
+            fig_1.layout.plot_bgcolor
+            or fig_1.layout.paper_bgcolor
+            or "#FFFFFF"
+        )
+        line_thickness = 1
+        annot_bg_color = "#706F6F"
         
-        # # Add dashed vertical lines dividing the periods
-        # fig.add_vline(
-        #     x=p1_end_time, 
-        #     line_color=dynamic_bg_color, 
-        #     line_width=line_thickness
-        # )
-        
-        # if not p3_data.empty:
-        #     fig.add_vline(
-        #         x=p2_end_time,  
-        #         line_color=dynamic_bg_color,
-        #         line_width=line_thickness
-        #     )
+        fig_1.add_shape(
+            type="line",
+            x0="45' (2T)",    # Posição no eixo X (início)
+            x1="45' (2T)",    # Posição no eixo X (fim) - igual ao x0 para ser vertical
+            y0=0,  # Início no eixo Y
+            y1=100,  # Fim no eixo Y
+            line=dict(
+                color=dynamic_bg_color,
+                width=line_thickness,
+                dash="dash"  # Opcional: "solid", "dot", "dash", "dashdot"
+            )
+        )
+
+        # 2. Add the text explicitly controlling the coordinates
+        fig_1.add_annotation(
+            x="0' (1T)", 
+            y=0, # Position on the Y axis (1.02 pushes it slightly above the chart)
+            # yref="paper", # "paper" means 0 is the bottom of the chart and 1 is the top
+            text="1º Tempo",
+            showarrow=False,
+            font=dict(color="white", size=12),
+            xanchor="left",
+            yanchor="bottom",
+            bgcolor=annot_bg_color,
+        )
+        # 2. Add the text explicitly controlling the coordinates
+        fig_1.add_annotation(
+            x="45' (2T)", 
+            y=0, # Position on the Y axis (1.02 pushes it slightly above the chart)
+            # yref="paper", # "paper" means 0 is the bottom of the chart and 1 is the top
+            text="2º Tempo",
+            showarrow=False,
+            font=dict(color="white", size=12),
+            xanchor="left",
+            yanchor="bottom",
+            bgcolor=annot_bg_color,
+        )
+
+        if not p3_data.empty:
+            fig_1.add_shape(
+                type="line",
+                x0="90' (PROR1)",    # Posição no eixo X (início)
+                x1="90' (PROR1)",    # Posição no eixo X (fim) - igual ao x0 para ser vertical
+                y0=0,  # Início no eixo Y
+                y1=100,  # Fim no eixo Y
+                line=dict(
+                    color=dynamic_bg_color,
+                    width=line_thickness,
+                    dash="dash"  # Opcional: "solid", "dot", "dash", "dashdot"
+                )
+            )
             
-        # if not p4_data.empty:
-        #     fig.add_vline(
-        #         x=p3_end_time,  
-        #         line_color=dynamic_bg_color,
-        #         line_width=line_thickness
-        #     )
-        
-        for index, row in match_events.iterrows():
-            goal_time = f"{int(round(row['time']))}' ({row['periodId']}T)"
+            fig_1.add_shape(
+                type="line",
+                x0="105' (PROR2)",    # Posição no eixo X (início)
+                x1="105' (PROR2)",    # Posição no eixo X (fim) - igual ao x0 para ser vertical
+                y0=0,  # Início no eixo Y
+                y1=100,  # Fim no eixo Y
+                line=dict(
+                    color=dynamic_bg_color,
+                    width=line_thickness,
+                    dash="dash"  # Opcional: "solid", "dot", "dash", "dashdot"
+                )
+            )
+
+
+            fig_1.add_annotation(
+                x="90' (PROR1)", 
+                y=0, # Position on the Y axis (1.02 pushes it slightly above the chart)
+                # yref="paper", # "paper" means 0 is the bottom of the chart and 1 is the top
+                text="1ºT. Pror.",
+                showarrow=False,
+                font=dict(color="white", size=12),
+                xanchor="left",
+                yanchor="bottom",
+                bgcolor=annot_bg_color,
+            )
+
+            fig_1.add_annotation(
+                x="105' (PROR2)", 
+                y=0, # Position on the Y axis (1.02 pushes it slightly above the chart)
+                # yref="paper", # "paper" means 0 is the bottom of the chart and 1 is the top
+                text="2ºT. Pror.",
+                showarrow=False,
+                font=dict(color="white", size=12),
+                xanchor="left",
+                yanchor="bottom",
+                bgcolor=annot_bg_color,
+            )
+
+        for index, row in match_confirmed_goals.iterrows():
+            if row['periodId'] in {1, 2}:
+                goal_time = f"{int(round(row['time']))}' ({row['periodId']}T)"
+            elif row['periodId'] in {3, 4}:
+                goal_time = f"{int(round(row['time']))}' (PROR{row['periodId'] - 2})"
+
             scorer_name = row['playerName']
             # print(scorer_name)
             # print(goal_time)
-            fig.add_vline(
-                x=goal_time, 
-                line_color="white", 
-                line_width=2,
-                # annotation_text="a",
-                # annotation_position="top"
-        )
+            # fig_1.add_vline(
+            #     x=goal_time, 
+            #     line_color="white", 
+            #     line_width=2,
+            #     # annotation_text="a",
+            #     # annotation_position="top"
+            # )
+
+            fig_1.add_shape(
+                type="line",
+                x0=goal_time,    # Posição no eixo X (início)
+                x1=goal_time,    # Posição no eixo X (fim) - igual ao x0 para ser vertical
+                y0=100,  # Início no eixo Y
+                y1=105 + (index % 2)*5,  # Fim no eixo Y
+                line=dict(
+                    color="white",
+                    width=2
+                )
+            )
             # 2. Add the text explicitly controlling the coordinates
-            fig.add_annotation(
+            fig_1.add_annotation(
                 x=goal_time, 
-                y=1.00 + (index % 2)/30, # Position on the Y axis (1.02 pushes it slightly above the chart)
-                yref="paper", # "paper" means 0 is the bottom of the chart and 1 is the top
+                y=110 + (index % 2)*5, # Position on the Y axis (1.02 pushes it slightly above the chart)
                 text=f"⚽{scorer_name} {int(round(row['time']))}'",
                 showarrow=False,
                 font=dict(color="white", size=12),
-                xanchor="center",
-                yanchor="bottom"
+                xanchor="center"
             )
 
-        st.plotly_chart(fig, width='stretch', key="single_match_trend")
+        st.plotly_chart(fig_1, width='stretch', key="single_match_trend")
+        
+        # -------------------------------------------------------------------------------------------------------
+        
+        fig_2 = px.line(
+            match_data_to_plot, 
+            x='display_time', 
+            y='model_grade',
+            title="Desempenho de acordo com o resultado final"
+        )
+
+        fig_2.update_traces(hovertemplate="")
+        
+        # 4. Customize the X-axis to hide the artificial timeline
+        fig_2.update_layout(
+            xaxis=dict(
+                title="Tempo de Jogo",
+                tickvals=tick_positions,
+                ticktext=tick_labels
+            ),
+            yaxis=dict(
+                title="Desempenho",
+                tickformat=".0f",
+                ticksuffix='%'
+            ),
+            hovermode="x unified" 
+        )
+        dynamic_bg_color = bg = (
+            fig_2.layout.plot_bgcolor
+            or fig_2.layout.paper_bgcolor
+            or "#FFFFFF"
+        )
+        line_thickness = 1
+        annot_bg_color = "#706F6F"
+        
+        fig_2.add_shape(
+            type="line",
+            x0="45' (2T)",    # Posição no eixo X (início)
+            x1="45' (2T)",    # Posição no eixo X (fim) - igual ao x0 para ser vertical
+            y0=0,  # Início no eixo Y
+            y1=100,  # Fim no eixo Y
+            line=dict(
+                color=dynamic_bg_color,
+                width=line_thickness,
+                dash="dash"  # Opcional: "solid", "dot", "dash", "dashdot"
+            )
+        )
+
+        # 2. Add the text explicitly controlling the coordinates
+        fig_2.add_annotation(
+            x="0' (1T)", 
+            y=0, # Position on the Y axis (1.02 pushes it slightly above the chart)
+            # yref="paper", # "paper" means 0 is the bottom of the chart and 1 is the top
+            text="1º Tempo",
+            showarrow=False,
+            font=dict(color="white", size=12),
+            xanchor="left",
+            yanchor="bottom",
+            bgcolor=annot_bg_color,
+        )
+        # 2. Add the text explicitly controlling the coordinates
+        fig_2.add_annotation(
+            x="45' (2T)", 
+            y=0, # Position on the Y axis (1.02 pushes it slightly above the chart)
+            # yref="paper", # "paper" means 0 is the bottom of the chart and 1 is the top
+            text="2º Tempo",
+            showarrow=False,
+            font=dict(color="white", size=12),
+            xanchor="left",
+            yanchor="bottom",
+            bgcolor=annot_bg_color,
+        )
+
+        if not p3_data.empty:
+            fig_2.add_shape(
+                type="line",
+                x0="90' (PROR1)",    # Posição no eixo X (início)
+                x1="90' (PROR1)",    # Posição no eixo X (fim) - igual ao x0 para ser vertical
+                y0=0,  # Início no eixo Y
+                y1=100,  # Fim no eixo Y
+                line=dict(
+                    color=dynamic_bg_color,
+                    width=line_thickness,
+                    dash="dash"  # Opcional: "solid", "dot", "dash", "dashdot"
+                )
+            )
+            
+            fig_2.add_shape(
+                type="line",
+                x0="105' (PROR2)",    # Posição no eixo X (início)
+                x1="105' (PROR2)",    # Posição no eixo X (fim) - igual ao x0 para ser vertical
+                y0=0,  # Início no eixo Y
+                y1=100,  # Fim no eixo Y
+                line=dict(
+                    color=dynamic_bg_color,
+                    width=line_thickness,
+                    dash="dash"  # Opcional: "solid", "dot", "dash", "dashdot"
+                )
+            )
+
+
+            fig_2.add_annotation(
+                x="90' (PROR1)", 
+                y=0, # Position on the Y axis (1.02 pushes it slightly above the chart)
+                # yref="paper", # "paper" means 0 is the bottom of the chart and 1 is the top
+                text="1ºT. Pror.",
+                showarrow=False,
+                font=dict(color="white", size=12),
+                xanchor="left",
+                yanchor="bottom",
+                bgcolor=annot_bg_color,
+            )
+
+            fig_2.add_annotation(
+                x="105' (PROR2)", 
+                y=0, # Position on the Y axis (1.02 pushes it slightly above the chart)
+                # yref="paper", # "paper" means 0 is the bottom of the chart and 1 is the top
+                text="2ºT. Pror.",
+                showarrow=False,
+                font=dict(color="white", size=12),
+                xanchor="left",
+                yanchor="bottom",
+                bgcolor=annot_bg_color,
+            )
+
+        for index, row in match_confirmed_goals.iterrows():
+            if row['periodId'] in {1, 2}:
+                goal_time = f"{int(round(row['time']))}' ({row['periodId']}T)"
+            elif row['periodId'] in {3, 4}:
+                goal_time = f"{int(round(row['time']))}' (PROR{row['periodId'] - 2})"
+
+            scorer_name = row['playerName']
+            # print(scorer_name)
+            # print(goal_time)
+            # fig_2.add_vline(
+            #     x=goal_time, 
+            #     line_color="white", 
+            #     line_width=2,
+            #     # annotation_text="a",
+            #     # annotation_position="top"
+            # )
+
+            fig_2.add_shape(
+                type="line",
+                x0=goal_time,    # Posição no eixo X (início)
+                x1=goal_time,    # Posição no eixo X (fim) - igual ao x0 para ser vertical
+                y0=100,  # Início no eixo Y
+                y1=105 + (index % 2)*5,  # Fim no eixo Y
+                line=dict(
+                    color="white",
+                    width=2
+                )
+            )
+            # 2. Add the text explicitly controlling the coordinates
+            fig_2.add_annotation(
+                x=goal_time, 
+                y=110 + (index % 2)*5, # Position on the Y axis (1.02 pushes it slightly above the chart)
+                text=f"⚽{scorer_name} {int(round(row['time']))}'",
+                showarrow=False,
+                font=dict(color="white", size=12),
+                xanchor="center"
+            )
+        st.plotly_chart(fig_2, width='stretch', key="single_match_eval")
+        # st.dataframe(match_data_to_plot)
     else:
         st.info("Nenhum dado de período válido encontrado para este jogo.")
 
-st.dataframe(match_events)
+# -------------------------------------------------------------------------------------------------------
+st.markdown(line_sep)
+# -------------------------------------------------------------------------------------------------------
+
+
+
+
+# st.dataframe(match_events)
