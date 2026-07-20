@@ -5,6 +5,7 @@ import pandas as pd
 import sqlite3
 import countryflag as cf
 from rich.progress import track
+from utils.dataframe_utils import to_br_timezone
 
 fifa_ranking_df = pd.read_csv('../data/etc/fifa_ranking_pre_wc.csv', encoding='utf-8')
 qualify_files = sorted([f.name for f in Path('../data/opta/qualify_jsons').iterdir() if f.is_file()])
@@ -28,6 +29,16 @@ for file in track(qualify_files, description="Processing files"):
 
     for i, stage in enumerate(stages):
         if stage['name'] == "Group Stage":
+            stages.pop(i)
+            break
+    
+    for i, stage in enumerate(stages):
+        if stage['name'] == "16th Finals":
+            stages.pop(i)
+            break
+
+    for i, stage in enumerate(stages):
+        if stage['name'] == "8th Finals":
             stages.pop(i)
             break
 
@@ -74,7 +85,21 @@ df.columns.name = None
 #     print(df.loc[df['snapshot_br'] == snapshot, "contestants.contestant.predictions.lastUpdated"].nunique())
 
 df.columns = ['stage_name', 'stage_id', "contestant_id", 'contestant_name', 'last_updated', 'snapshot_br', 'typeId_1', 'typeId_2']
+df['last_updated_br'] = to_br_timezone(df['last_updated'])
+df = df[df['typeId_1'] != 0].copy()
+
 
 test_df = df
 test_df.to_csv("../test.csv", index=False)
+
+conn = sqlite3.connect("../data/db/world_cup.db")
+
+df.to_sql(
+    name="qualifying_probas",  # Nome da tabela dentro do SQLite
+    con=conn,  # A conexão que abrimos acima
+    if_exists="replace",  # 'append' adiciona os dados novos. 'replace' reconstrói a tabela do zero.
+    index=False,  # Não salva o índice do Pandas como uma coluna no banco
+)
+
+conn.close()
 # %%

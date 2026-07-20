@@ -23,6 +23,7 @@ def load_data():
     df = pd.read_sql("SELECT * FROM opta_snapshots", conn)
     df_events = pd.read_sql("SELECT * FROM match_events", conn)
     df_live_predictions = pd.read_sql("SELECT * FROM live_predictions", conn).sort_values(by=['opta_match_id', 'periodId', 'time'])
+    df_qualify_probas = pd.read_sql("SELECT * FROM qualifying_probas", conn)
     conn.close()
     
     # Garantir que a coluna de snapshot seja datetime
@@ -31,9 +32,11 @@ def load_data():
     df['match_datetime_br'] = pd.to_datetime(df['match_datetime_br'])
     df = df.sort_values(by='final_whistle_br')
 
-    return df, df_events, df_live_predictions
+    df_qualify_probas['last_updated_br'] = pd.to_datetime(df_qualify_probas['last_updated_br'])
 
-df, df_events, df_live_predictions = load_data()
+    return df, df_events, df_live_predictions, df_qualify_probas
+
+df, df_events, df_live_predictions, df_qualify_probas = load_data()
 
 # st.dataframe(df_live_predictions)
 # st.dataframe(df)
@@ -243,6 +246,26 @@ if len(next_matches) != 0:
     # -------------------------------------------------------------------------------------------------------
     st.markdown(line_sep)
     # -------------------------------------------------------------------------------------------------------
+
+qualify_probas_df_filtered = df_qualify_probas[df_qualify_probas['last_updated_br'] <= latest_snapshot]
+if len(qualify_probas_df_filtered) != 0:
+    st.subheader("Probabilidades de ser Campeão")
+    champion_df = qualify_probas_df_filtered[
+        (qualify_probas_df_filtered["stage_name"] == "Final")
+    ]
+    cols_to_keep = [col for col in champion_df.columns if col not in ["contestant_id", "stage_id", "last_updated", "snapshot_br"]]
+    # st.dataframe(champion_df[cols_to_keep])
+    fig = px.line(
+        champion_df, 
+        x='last_updated_br', 
+        y='typeId_2',
+        color='contestant_name'
+    )
+    st.plotly_chart(fig, width='stretch', key="champion_probas")
+    # -------------------------------------------------------------------------------------------------------
+    st.markdown(line_sep)
+    # -------------------------------------------------------------------------------------------------------
+
 
 st.subheader("Desempenho do Modelo em cada Partida")
 df_filtered['cum_mean'] = df_filtered['model_grade'].expanding().mean()

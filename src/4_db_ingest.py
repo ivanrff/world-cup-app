@@ -5,12 +5,15 @@ import pandas as pd
 import sqlite3
 import countryflag as cf
 from rich.progress import track
+import logging
+import time
+from utils.dataframe_utils import to_br_timezone
 
-def to_br_timezone(column):
-    converted_col = column.dt.tz_convert(
-    "America/Sao_Paulo").dt.tz_localize(None)
+# Configure standard logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-    return converted_col
+# Start timer
+start_time = time.perf_counter()
 
 fifa_ranking_df = pd.read_csv('../data/etc/fifa_ranking_pre_wc.csv', encoding='utf-8')
 fixture_files = sorted([f.name for f in Path('../data/opta/fixture_jsons').iterdir() if f.is_file()])
@@ -271,4 +274,8 @@ match_live_predictions_df.to_sql(
 match_live_predictions_df.to_csv("../live_predictions.csv", index=False)
 
 conn.close()
+
+end_time = time.perf_counter()
+execution_time = end_time - start_time
+logging.info(f"Processing completed in {execution_time:.4f} seconds")
 # %%
